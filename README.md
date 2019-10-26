@@ -31,4 +31,7 @@
         * git push -u origin master
     * products app 생성
         * product List 제작중
+        * sidebar template 제작
+        * DB 구축중
     * pip install pillow
+    * admin 사이트 template 수정중
