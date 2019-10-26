@@ -23,6 +23,9 @@
     * 10/26
 ----------
 * 수행내용
+    * Custom template --> 직접 작성한 css 와 js 기입하는 파일
+        * mainsite/static/mainsite/css/custom.css 생성
+        * mainsite/static/mainsite/js/custom.js 생성
     * 깃헙 설정
         * git commit -m "first commit"
         * git push -u origin master
