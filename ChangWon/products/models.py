@@ -17,13 +17,8 @@ class Product(models.Model):
     
     # 삭제함수는 수정중에 있습니다 --> 오류 발견 10/26 김영환    
     def delete(self, *args, **kargs): 
-        try:
-            this = Product.objects.get(id=self.id)
-            print("삭제완료1")
-            this.photo.delete(save=False)
-            print("삭제완료2")
-        except: pass # when new photo then we do nothing, normal case   
-        super(Product, self).delete(*args, **kwargs)
+        os.remove(os.path.join(settings.MEDIA_ROOT+"products/", self.photo.path))
+        super(Product, self).delete(*args, **kargs) # 원래의 delete 함수를 실행
         
     # 업데이트시 이전사진 삭제 --> 잘 돌아감 10/26 김영환    
     def save(self, *args, **kwargs):
