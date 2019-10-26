@@ -26,4 +26,6 @@
     * 깃헙 설정
         * git commit -m "first commit"
         * git push -u origin master
+    * products app 생성
+        * product List 제작중
     * pip install pillow
