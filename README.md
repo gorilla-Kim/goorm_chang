@@ -23,4 +23,7 @@
     * 10/26
 ----------
 * 수행내용
+    * 깃헙 설정
+        * git commit -m "first commit"
+        * git push -u origin master
     * pip install pillow
