@@ -9656,24 +9656,52 @@ hr.light {
 }
 
 header.masthead {
-  padding-top: 10rem;
-  padding-bottom: calc(10rem - 72px);
+    /* margin-top: -5rem; */
+  /* padding-top: 4rem; */
+  /* padding-bottom: calc(10rem - 72px); */
   background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../img/bg-masthead.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
+    overflow:hidden;
+    height: 100%;
+}
+/* 메인 케러셀 */
+.masthead .container {
+    max-width: 1920px;
+    margin: 0;
+    padding: 0;
+}
+.masthead .container #carouselExampleIndicators {
+    max-width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
+.background-img {
+    margin: 0;
+    width:95rem;
+    height:auto;
+}
+
+/* end  */
 header.masthead h1 {
   font-size: 2.25rem;
 }
+/* test  */
+@media (max-width: 992px) {
+    .background-img {
+        margin-left:-100%;
+    }
+}
+/* end */
 
 @media (min-width: 992px) {
   header.masthead {
     height: 100vh;
     min-height: 40rem;
-    padding-top: 72px;
+    /* padding-top: 72px; */
     padding-bottom: 0;
   }
   header.masthead p {

@@ -132,3 +132,26 @@ STATICFILES_FINDERS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+#2019-10-27 남승철 추가 
+#이메일 보낼 때 
+
+# gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = '000@gmail.com'
+EMAIL_HOST_PASSWORD =' ' # 2단계 보안 인증 비밀번호=(앱 비밀번호) 
+EMAIL_PORT = 587        # 권장 gmail smtp포트 
+EMAIL_USE_TLS = True    #tls 보안
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#naver
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.naver.com"
+EMAIL_HOST_USER = 'flash0211@naver.com'
+EMAIL_HOST_PASSWORD ='E5JLEK2VVGJT' # 2단계 보안 인증 비밀번호 = (앱 비밀번호)
+EMAIL_PORT = 587        # 권장 naver smtp포트 
+EMAIL_USE_TLS = True    #tls 보안 설정
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

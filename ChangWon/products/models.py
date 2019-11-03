@@ -29,7 +29,18 @@ class Product(models.Model):
                 this.photo.delete(save=False)
         except: pass # when new photo then we do nothing, normal case          
         super(Product, self).save(*args, **kwargs)
-        
-        
-        
-        
+
+     
+
+# 문의 사항 데이터베이스 - 2019-10.28 남승철 추가
+class Request(models.Model):
+    email = models.EmailField() # 문의자 이메일
+    content = models.TextField() # 문의 내용
+
+    def __str__(self):
+        return self.email
+
+# 주문 내역 데이테베이스 - 2019-10.28 남승철 추가
+class Order(models.Model):
+    product_name = models.CharField(max_length=100) # 주문 품목
+    order_count = models.IntegerField() # 수량

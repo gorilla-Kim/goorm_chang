@@ -7,19 +7,16 @@
 {% block contents %}
 <section class="custom-section bg-primary" id="products">
     <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
+        <!-- Sidebar -->
+        <nav id="sidebar" class=" bg-secondary text-white">
             <div class="sidebar-header">
-                <h3>Product List</h3>
-                <strong>CW</strong>
+                <h3>Bootstrap Sidebar</h3>
             </div>
 
             <ul class="list-unstyled components">
+                <p>Dummy Heading</p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-home"></i>
-                        Home
-                    </a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
                             <a href="#">Home 1</a>
@@ -33,14 +30,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fas fa-briefcase"></i>
-                        About
-                    </a>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-copy"></i>
-                        Pages
-                    </a>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a href="#">Page 1</a>
@@ -54,29 +47,15 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fas fa-image"></i>
-                        Portfolio
-                    </a>
+                    <a href="#">Equipment</a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fas fa-question"></i>
-                        FAQ
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-paper-plane"></i>
-                        Contact
-                    </a>
+                    <a href="#">Contact</a>
                 </li>
             </ul>
         </nav>
-
-        <!-- Page Content  -->
+        <!--   content    -->
         <div id="content">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
@@ -84,6 +63,7 @@
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
+
                 </div>
             </nav>
             <!--  여기서부터 Product 리스트를 업로드 하시면 됩니다.  -->
@@ -93,8 +73,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">
-                            제품명 : 테스트 || 가격 : 500원
-                            <br>
+                            제품명 : 테스트 || 가격 : 500원<br>
                         </p>
                     </div>
                     <div class="card-footer">
