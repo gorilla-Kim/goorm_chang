@@ -5,7 +5,8 @@
 {% block title %}Chang-Won{% endblock %}
 
 {% block contents %}
-<section class="custom-section bg-primary" id="products">
+
+<section class="page-section bg-primary" id="products">
     <div class="wrapper">
         <!-- Sidebar -->
         <nav id="sidebar" class=" bg-secondary text-white">
@@ -47,7 +48,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Equipment</a>
+                    <a href="#">Portfolio</a>
                 </li>
                 <li>
                     <a href="#">Contact</a>
@@ -63,7 +64,7 @@
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-
+                    <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#myModal">문의하기</button> <!-- 남승철 수정 임시 문의 버튼-->
                 </div>
             </nav>
             <!--  여기서부터 Product 리스트를 업로드 하시면 됩니다.  -->
@@ -78,6 +79,7 @@
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Last updated 3 mins ago</small>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModals">주문</button> <!-- 남승철 수정 임시 문의 버튼-->
                     </div>
                 </div>
                 <div class="card">
@@ -88,6 +90,7 @@
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Last updated 3 mins ago</small>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModals">주문</button> <!-- 남승철 수정 임시 문의 버튼-->
                     </div>
                 </div>
                 <div class="card">
@@ -98,10 +101,71 @@
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Last updated 3 mins ago</small>
+                        <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#myModals">주문</button> <!-- 남승철 수정 임시 문의 버튼-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 </section>
+
+<!-- 문의 모달 2019 10 27 남승철 추가-->
+
+<div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <form method="POST" action ="{%url 'sendEmail'%}">
+                {%csrf_token%}
+                <div class="form-group">
+                  <label for="exampleInputEmail1">사용자 메일</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">내용</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "content"></textarea>
+                  </div>
+                </div>
+        
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">문의</button>
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 주문서 모달 2019 10 27 남승철 추가-->
+  <div class="modal" tabindex="-1" role="dialog" id="myModals">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <form method="POST" action ="{%url 'order'%}">
+                    {%csrf_token%}
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">주문 품목</label>
+                      <input type="" disabled class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="품목명" name="email">
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-number-input" class="col-12 col-form-label" name = "count">수량</label>
+                        <div class="col-12">
+                          <input class="form-control" type="number" value="0" id="example-number-input" name = "count">
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">요청사항</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "content" ></textarea>
+                      </div>
+                    </div>
+            
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">문의</button>
+                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                    </div>
+                </form>
+          </div>
+        </div>
+      </div>
 {% endblock %}
