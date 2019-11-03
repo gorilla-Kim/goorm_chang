@@ -105,6 +105,11 @@
                     </div>
                 </div>
             </div>
+            {% if error != "" %}
+            <div class="alert alert-danger" role="alert" style="display: block;">
+              {{ error }}
+            </div>
+            {% endif %}
         </div>
     </div>
     

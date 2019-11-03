@@ -3,25 +3,29 @@ from django.shortcuts import render, redirect # redirect 추가 - 2019 10 27 남
 from django.core.mail import EmailMessage # 메일 객체 생성시 필요함 - 2019-10-26 남승철 추가
 from .models import Product, Request # 순서대로 문의, 발주 DB - 2019-10-28 박은혜 추가
  
-# Create your views here.
-
+    
+# ========================================
+#             에러 핸들러 사용법 -김영환
+#-----------------------------------------
+# parameter (아래 참고) 
+# request : request, 
+# activate : 실행모드(True=error생성, False=에러출력 및 삭제), 
+# msg : message
+#=========================================
 # error message handler function -김영환
-def error_handeler(request, msg):
+def error_handeler(request, active, msg):
     err_msg = ""
-    if request.session.get('error', False):
+    if request.session.get('error', False) and not active:
         err_msg = request.session['error']
         del request.session['error']
-    else:
+    elif active == True:
         request.session['error'] = msg
     return err_msg
 
 # product들의 리스트를 보여주는 페이지입니다 - 김영환
 def main(request):
-    
-       
     # products = Product.objects.all() --> 심세은님 부탁드립니다. 
-    context = {"error":error_handeler(request, msg), "title":"Chang-Won"}
-    
+    context = {"error":error_handeler(request, False, ""), "title":"Chang-Won"}
     return render(request, 'products/index.html', context)
 
 
@@ -74,6 +78,6 @@ def order(request):
             order_count = count, 
         ).save()
     except:
-        error_handeler(request, "- DB 오류 -")
+        error_handeler(request, True, "- DB 오류 -")
 
-    return redirect('main')
+    return redirect('productsList')
