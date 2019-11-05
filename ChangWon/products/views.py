@@ -1,9 +1,7 @@
-
 from django.shortcuts import render, redirect # redirect 추가 - 2019 10 27 남승철 추가
 from django.core.mail import EmailMessage # 메일 객체 생성시 필요함 - 2019-10-26 남승철 추가
-from .models import Product, Request # 순서대로 문의, 발주 DB - 2019-10-28 박은혜 추가
- 
-    
+from .models import Product, Order # 순서대로 문의, 발주 DB - 2019-10-28 박은혜 추가
+  
 # ========================================
 #             에러 핸들러 사용법 -김영환
 #-----------------------------------------
@@ -24,8 +22,8 @@ def error_handeler(request, active, msg):
 
 # product들의 리스트를 보여주는 페이지입니다 - 김영환
 def main(request):
-    # products = Product.objects.all() --> 심세은님 부탁드립니다. 
-    context = {"error":error_handeler(request, False, ""), "title":"Chang-Won"}
+    products = Product.objects.all()
+    context = {"error":error_handeler(request, False, ""), "title":"Chang-Won", "products": products}
     return render(request, 'products/index.html', context)
 
 
@@ -48,14 +46,13 @@ def sendEmail(request):                     # 문의 사항 이메일 보내기 
     try :
         Request(email = who, content = content).save()
     except:
-       request(email = None, content = None).save()
+        Request(email = None, content = None).save()
 
     return redirect('main')
 
 
 def order(request):
     email = request.POST.get("email")
-    pw = request.POST.get("pw")
     subject = request.POST.get("subject")
     desc = request.POST.get("description")
     count = request.POST.get("count")
@@ -63,20 +60,19 @@ def order(request):
     # 메일 보내기
     emailcontent = EmailMessage()                            # 이메일 객체 생성
     emailcontent.subject = subject
-    emailcontent.body =  count                              # 내용
+    emailcontent.body =  count                           # 내용
     emailcontent.from_email = 'flash0211@naver.com'         # 발신지
     emailcontent.to = ['flash0211@naver.com']               # 목적지
     emailcontent.send() 
 
     # 주문 내용을 디비에 저장  - 2019-10.28 박은혜 추가, 2019-11-03 김영환 수정
+   
     try:
-        Request(
+        Order(
             email = email, 
-            pw = pw,
             subject = subject, 
-            description = desc,
-            order_count = count, 
-        ).save()
+            order_count =int(count), 
+            description = desc ).save()
     except:
         error_handeler(request, True, "- DB 오류 -")
 

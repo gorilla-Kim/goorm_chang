@@ -30,14 +30,10 @@ class Product(models.Model):
         except: pass # when new photo then we do nothing, normal case          
         super(Product, self).save(*args, **kwargs)
 
-     
-
-# 문의 사항 데이터베이스 - 2019-10.28 남승철 추가
-class Request(models.Model):
-    email = models.EmailField() # 문의자 이메일
-    pw = models.CharField(max_length=10) # PassWord 
+class Order(models.Model):
+    email = models.EmailField() 
     subject = models.CharField(max_length=20)
-    order_count = models.IntegerField() # 수량
+    order_count = models.IntegerField()
     description = models.TextField() # 문의 내용
     created_at = models.DateTimeField(auto_now_add=True)    # 해당 레코드 생성시 현재 시간 자동저장
 

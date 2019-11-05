@@ -151,7 +151,15 @@
                     {%csrf_token%}
                     <div class="form-group">
                       <label for="exampleInputEmail1">주문 품목</label>
-                      <input type="" disabled class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="품목명" name="email">
+                      <input type=""  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="품목명" name="subject">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">E-mail</label>
+                      <input type="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@example.com" name="email">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">PassWord</label>
+                      <input type="password"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="pw">
                     </div>
                     <div class="form-group row">
                         <label for="example-number-input" class="col-12 col-form-label" name = "count">수량</label>
@@ -161,10 +169,17 @@
                       </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">요청사항</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "content" ></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "description" ></textarea>
                       </div>
+                    
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Q&A</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
-            
+                    
+                    </div>
+                    <!-- Q&A 칸-->
+                
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">문의</button>
                         <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>

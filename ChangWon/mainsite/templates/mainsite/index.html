@@ -5,23 +5,28 @@
 {% block title %}Chang-Won{% endblock %}
 
 {% block contents %}
+<link href="{% static 'mainsite/css/creative.css' %}" rel="stylesheet"> 
+<!-- 색 수정을 위해 추가 -->
+
 <!-- Masthead 1번페이지 내용 -->
 <header class="masthead">
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center text-center">
             <div class="col-lg-10 align-self-end">
-                <h1 class="text-uppercase text-white font-weight-bold">Your Favorite Source of Free Bootstrap Themes</h1>
+                <h1 class="text-uppercase text-white font-weight-bold"> OO 홈페이지에 오신 것을<br/> 환영합니다!</h1><!--홈페이지 메인 화면-->
                 <hr class="divider my-4">
             </div>
-            <div class="col-lg-8 align-self-baseline">
+            <div class="col-lg-8 align-self-baseline"><!--주요 거래처 디비에서 받아옴-->
                 <div class="typing-box">
                     <div class="typing-txt">
                         <!-- 화면에 출력할 내용을 list안에 추가해주세요. - 김영환 -->
+                        <p class="text-white-75 font-weight-light mb-5">주요 거래 업체 : </p>
                         <ul>
-                            <li>타이핑될 첫번째 문장aaaaaaaaaaaaaaaaaaaa</li>
-                            <li>두번째로 타이핑될 문장</li>
-                            <li>마지막 문장</li>
+                            {% for i in client  %}
+                                <li>{{i}}</li> 
+                            {% endfor %}
                         </ul>
+                        <br/><p>이외 130여체의 기업들</p>
                     </div>
                     <p class="typing"></p><br>
                 </div>
@@ -35,10 +40,12 @@
 <section class="page-section bg-primary" id="about">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h2 class="text-white mt-0">We've got what you need!</h2>
+            <div class="col-lg-8 text-justify">
+                <h2 class="text-center text-black mt-0">CEO 인사말</h2><!--인사말만 가운데 정렬-->
                 <hr class="divider light my-4">
-                <p class="text-white-50 mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! Choose one of our open source, free to download, and easy to use themes! No strings attached!</p>
+                <p class="text-black mb-4">
+                    {{ about }}
+                <!--인사말 내용 디비에서 받아옴--></p>
                 <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
             </div>
         </div>
@@ -48,119 +55,96 @@
 <!-- Services Section -->
 <section class="page-section" id="services">
     <div class="container">
-        <h2 class="text-center mt-0">At Your Service</h2>
+        <h2 class="text-center mt-0">보유하고 있는 기계</h2>
         <hr class="divider my-4">
         <div class="row">
+            {% for i in tech %}
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="mt-5">
-                    <i class="fas fa-4x fa-gem text-primary mb-4"></i>
-                    <h3 class="h4 mb-2">Sturdy Themes</h3>
-                    <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
+                    <!-- <i class="fas fa-4x fa-gem text-primary mb-4"></i> -->
+                    <img src="{% static 'mainsite/img/m2.JPG' %}" alt="">
+                    <h3 class="h4 mb-2">{{i}}</h3>
+                    <p class="text-muted mb-0">{{i.tech_content}}</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5">
-                    <i class="fas fa-4x fa-laptop-code text-primary mb-4"></i>
-                    <h3 class="h4 mb-2">Up to Date</h3>
-                    <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5">
-                    <i class="fas fa-4x fa-globe text-primary mb-4"></i>
-                    <h3 class="h4 mb-2">Ready to Publish</h3>
-                    <p class="text-muted mb-0">You can use this design as is, or you can make changes!</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="mt-5">
-                    <i class="fas fa-4x fa-heart text-primary mb-4"></i>
-                    <h3 class="h4 mb-2">Made with Love</h3>
-                    <p class="text-muted mb-0">Is it really open source if it's not made with love?</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- Portfolio Section -->
+<!-- Portfolio Section --> 
+<!-- 이미지 파일 디비에서 가져와야함 이미지 자동 사이즈 조절 때문에 두개 따로 했는데 디비에 어떻게 해야할지 몰라서 보류 -->
 <section id="portfolio">
     <div class="container-fluid p-0">
         <div class="row no-gutters">
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="{% static 'mainsite/img/portfolio/fullsize/1.jpg' %}">
-                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/1.jpg' %}" alt="헤헤">
+                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/Bending.jpg' %}">
+                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/Bending.jpg' %}" alt="">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            Category
                         </div>
                         <div class="project-name">
-                            Project Name
+                            CNC 절곡기
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="img/portfolio/fullsize/2.jpg">
-                    <img class="img-fluid" src="img/portfolio/thumbnails/2.jpg" alt="">
+                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/deburring.jpg' %}">
+                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/deburring.jpg' %}" alt="">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            Category
                         </div>
                         <div class="project-name">
-                            Project Name
+                            디버링기
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="img/portfolio/fullsize/3.jpg">
-                    <img class="img-fluid" src="img/portfolio/thumbnails/3.jpg" alt="">
+                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/foam.jpg' %}">
+                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/foam.jpg' %}" alt="">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            Category
                         </div>
                         <div class="project-name">
-                            Project Name
+                            폼밍기
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="img/portfolio/fullsize/4.jpg">
-                    <img class="img-fluid" src="img/portfolio/thumbnails/4.jpg" alt="">
+                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/la.jpg' %}">
+                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/la.jpg' %}" alt="">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            Category
                         </div>
                         <div class="project-name">
-                            Project Name
+                            CNC 레이저
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="img/portfolio/fullsize/5.jpg">
-                    <img class="img-fluid" src="img/portfolio/thumbnails/5.jpg" alt="">
+                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/tapping.jpg' %}">
+                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/tapping.jpg' %}" alt="">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            Category
                         </div>
                         <div class="project-name">
-                            Project Name
+                            탭핑기
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box" href="img/portfolio/fullsize/6.jpg">
-                    <img class="img-fluid" src="img/portfolio/thumbnails/6.jpg" alt="">
-                    <div class="portfolio-box-caption p-3">
+                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/punching.jpg' %}">
+                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/punching.jpg' %}" alt="">
+                    <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            Category
                         </div>
                         <div class="project-name">
-                            Project Name
+                            CNC 펀칭기
                         </div>
                     </div>
                 </a>
@@ -169,34 +153,40 @@
     </div>
 </section>
 
-<!-- Call to Action Section -->
+<!-- Call to Action Section
 <section class="page-section bg-dark text-white">
     <div class="container text-center">
         <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
         <a class="btn btn-light btn-xl" href="https://startbootstrap.com/themes/creative/">Download Now!</a>
     </div>
-</section>
+</section>  -->
+<!-- 필요없는 부분인거 같아서 삭제 -->
 
 <!-- Contact Section -->
+<!-- 이것도 디비에서 가져오도록 함 -->
 <section class="page-section" id="contact">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h2 class="mt-0">Let's Get In Touch!</h2>
+                <h2 class="mt-0">고객들의 연락을 기다리고 있겠습니다!</h2>
                 <hr class="divider my-4">
-                <p class="text-muted mb-5">Ready to start your next project with us? Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                <p class="text-muted mb-5">아래의 연락처로 연락을 주시면 친절히 상담을 도와드리겠습니다.</p>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+            {% for i in contact %}
+            <div class="col-lg-2 ml-auto text-center mb-5 mb-lg-0">
                 <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
-                <div>+1 (202) 555-0149</div>
+                <div>office : {{i}}<br/>
+                Call : {{i.call}}<br/>
+                Pax : {{i.pax}} </div>
             </div>
-            <div class="col-lg-4 mr-auto text-center">
+            <div class="col-lg-2 mr-auto text-center">
                 <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
                 <!-- Make sure to change the email address in anchor text AND the link below! -->
-                <a class="d-block" href="mailto:contact@yourwebsite.com">contact@yourwebsite.com</a>
+                <a class="d-block" href="mailto:contact@yourwebsite.com">{{i.email}}   </a>
             </div>
+            {% endfor %}
         </div>
     </div>
 </section>
