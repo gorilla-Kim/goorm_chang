@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect # redirect 추가 - 2019 10 27 남승철 추가
 from django.core.mail import EmailMessage # 메일 객체 생성시 필요함 - 2019-10-26 남승철 추가
-from .models import Product, Order # 순서대로 문의, 발주 DB - 2019-10-28 박은혜 추가
+from .models import Product, Order, KindOfProduct # 순서대로 문의, 발주 DB - 2019-10-28 박은혜 추가
+from django.core.paginator import Paginator # 페이지네이션, - 2019-11-09 김영환 추가
   
 # ========================================
 #             에러 핸들러 사용법 -김영환
@@ -22,12 +23,21 @@ def error_handeler(request, active, msg):
 
 # product들의 리스트를 보여주는 페이지입니다 - 김영환
 def main(request):
-    products = Product.objects.all()
+    kinds = KindOfProduct.objects.all()
+    products = Product.objects.filter(kindOf = 1)
+    # == 페이지네이션 관련 소스 시작 -김영환 ==
+    paginator = Paginator(products, 3) # Show 3 contacts per page
+    page = request.GET.get('page')
+    contacts = paginator.get_page(page)
+    
+    # == 페이지 네이션 관련 소스 끝 ==
     context = {
         "error":error_handeler(request, False, ""), # 에러를 제거하기 위한 사용 김영환
         "title":"Chang-Won", 
         "products": products, 
-        "path": request.path   # 현재 경로를 식별하기 위한 값 09.11.09 김영환
+        "kinds": kinds,
+        "path": request.path,   # 현재 경로를 식별하기 위한 값 09.11.09 김영환
+        "contacts": contacts
     }
     return render(request, 'products/index.html', context)
 

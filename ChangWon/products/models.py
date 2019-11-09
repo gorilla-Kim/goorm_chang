@@ -2,12 +2,21 @@ from django.db import models
 import os
 # Create your models here.
 
+# 상품 종류 DB
+class KindOfProduct(models.Model):
+    name = models.CharField(max_length=100, primary_key=True)    # 상품종류 이름
+    
+    def __str__(self):
+        return self.name
+    
 # 상품 DB
 class Product(models.Model):
+    kindOf = models.ForeignKey(KindOfProduct, on_delete=models.CASCADE) # kindofproduct 외래키 참조
     name = models.CharField(max_length=10)    # 상품이름
     description = models.TextField()    # 상품정보
     price = models.IntegerField()    # 가격정보
     photo = models.ImageField(upload_to="products")    # 상품 사진이름
+    kindOf = models.ForeignKey(KindOfProduct, on_delete=models.CASCADE) # kindofproduct 외래키 참조
     
     created_at = models.DateTimeField(auto_now_add=True)    # 해당 레코드 생성시 현재 시간 자동저장
     updated_at = models.DateTimeField(auto_now=True)    # 해당 레코드 갱신시 현재 시간 자동저장
@@ -31,7 +40,8 @@ class Product(models.Model):
         super(Product, self).save(*args, **kwargs)
 
 class Order(models.Model):
-    email = models.EmailField() 
+    email = models.EmailField()
+    pwd = models.CharField(max_length=30)
     subject = models.CharField(max_length=20)
     order_count = models.IntegerField()
     description = models.TextField() # 문의 내용

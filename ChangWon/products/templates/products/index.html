@@ -30,23 +30,11 @@
                         </li>
                     </ul>
                 </li>
+                {% for kind in kinds %}
                 <li>
-                    <a href="#">About</a>
+                    <a href="#">{{ kind }}</a>
                 </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
+                {% endfor %}
                 <li>
                     <a href="#">Portfolio</a>
                 </li>
@@ -68,43 +56,49 @@
                 </div>
             </nav>
             <!--  여기서부터 Product 리스트를 업로드 하시면 됩니다.  -->
+            
             <div class="card-deck m-2 mt-4">
+                {% for product in contacts %}
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="{{ product.photo.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">
-                            제품명 : 테스트 || 가격 : 500원<br>
+                            {{ product.description }}<br>
                         </p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+                        <small class="text-muted">가격 : {{ product.price }}</small><br>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModals">주문</button> <!-- 남승철 수정 임시 문의 버튼-->
                     </div>
                 </div>
-                <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModals">주문</button> <!-- 남승철 수정 임시 문의 버튼-->
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                        <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#myModals">주문</button> <!-- 남승철 수정 임시 문의 버튼-->
-                    </div>
-                </div>
+                {% endfor %}
             </div>
+            <nav aria-label="Page navigation" style="display: flex; justify-content: center; margin-top: 3rem;">
+                <ul class="pagination">
+                    {% if contacts.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ contacts.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    {% for i in contacts.paginator.page_range %}
+                    <li class="page-item {% if i == contacts.number %}active{% endif %}">
+                        <a class="page-link" href="?page={{i}}">{{ i }}</a>
+                    </li>
+                    {% endfor %}
+                    
+                    {% if contacts.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ contacts.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
             {% if error != "" %}
             <div class="alert alert-danger" role="alert" style="display: block;">
               {{ error }}
