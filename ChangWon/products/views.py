@@ -23,7 +23,12 @@ def error_handeler(request, active, msg):
 # product들의 리스트를 보여주는 페이지입니다 - 김영환
 def main(request):
     products = Product.objects.all()
-    context = {"error":error_handeler(request, False, ""), "title":"Chang-Won", "products": products}
+    context = {
+        "error":error_handeler(request, False, ""), # 에러를 제거하기 위한 사용 김영환
+        "title":"Chang-Won", 
+        "products": products, 
+        "path": request.path   # 현재 경로를 식별하기 위한 값 09.11.09 김영환
+    }
     return render(request, 'products/index.html', context)
 
 

@@ -43,6 +43,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <!-- 메인 페이지 네브바 식별 09.11.09 김영환 -->
+                    {% if path == "/" %}
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#about">About</a>
                     </li>
@@ -55,6 +57,12 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                     </li>
+                    <!-- products 페이지를 포함한 하위 페이지의 네브바 표시 09.11.09 김영환 -->
+                    {% elif path in "/products/" %} 
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{% url 'main' %}">Home</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{% url 'productsList' %}">Product</a>
                     </li>

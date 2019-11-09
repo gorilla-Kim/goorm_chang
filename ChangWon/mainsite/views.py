@@ -11,5 +11,11 @@ def main(request):
     about = About.objects.get(id = 1)
     tech =  Service.objects.all()
     contact = Contact.objects.all()
-    context = {"error":True, "title":"Chang-Won","client":client,"about":about,"tech":tech, "contact":contact}
+    context = { 
+        "title":"Chang-Won",
+        "client":client,
+        "about":about,"tech":tech, 
+        "contact":contact, 
+        "path": request.path  # 현재 경로를 식별하기 위한 값 09.11.09 김영환
+    }
     return render(request, 'mainsite/index.html', context)
