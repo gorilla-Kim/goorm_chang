@@ -1,4 +1,4 @@
-# ChangWon Project1
+# ChangWon Project
 
 * PM 
     * 김영환
