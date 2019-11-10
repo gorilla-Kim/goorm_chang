@@ -7,10 +7,13 @@ from .models import Contact
 
 # Create your views here.
 def main(request):
-    client = Intro.objects.all()
-    about = About.objects.get(id = 1)
-    tech =  Service.objects.all()
-    contact = Contact.objects.all()
+    try:
+        client = Intro.objects.all()
+        about = About.objects.all()
+        tech =  Service.objects.all()
+        contact = Contact.objects.all()
+    except:
+        print("="*10+" mainpage 관련 DB 오류 "+"="*10)
     context = { 
         "title":"Chang-Won",
         "client":client,

@@ -44,7 +44,9 @@
                 <h2 class="text-center text-black mt-0">CEO 인사말</h2><!--인사말만 가운데 정렬-->
                 <hr class="divider light my-4">
                 <p class="text-black mb-4">
-                    {{ about }}
+                {% for i in about %}
+                    {{ i }}
+                {% endfor %}
                 <!--인사말 내용 디비에서 받아옴--></p>
                 <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
             </div>
