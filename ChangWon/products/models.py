@@ -16,7 +16,6 @@ class Product(models.Model):
     description = models.TextField()    # 상품정보
     price = models.IntegerField()    # 가격정보
     photo = models.ImageField(upload_to="products")    # 상품 사진이름
-    kindOf = models.ForeignKey(KindOfProduct, on_delete=models.CASCADE) # kindofproduct 외래키 참조
     
     created_at = models.DateTimeField(auto_now_add=True)    # 해당 레코드 생성시 현재 시간 자동저장
     updated_at = models.DateTimeField(auto_now=True)    # 해당 레코드 갱신시 현재 시간 자동저장

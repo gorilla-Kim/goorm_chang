@@ -32,7 +32,7 @@
                 </li>
                 {% for kind in kinds %}
                 <li>
-                    <a href="#">{{ kind }}</a>
+                    <a class="kinds" href="/products?kind={{kind}}">{{ kind }}</a>
                 </li>
                 {% endfor %}
                 <li>
@@ -56,29 +56,29 @@
                 </div>
             </nav>
             <!--  여기서부터 Product 리스트를 업로드 하시면 됩니다.  -->
-            
+
+{% block product %}            
             <div class="card-deck m-2 mt-4">
                 {% for product in contacts %}
                 <div class="card">
                     <img src="{{ product.photo.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">
-                            {{ product.description }}<br>
-                        </p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">가격 : {{ product.price }}</small><br>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModals">주문</button> <!-- 남승철 수정 임시 문의 버튼-->
+                        <a href="{% url 'product_view' product.id %}" class="btn btn-primary" role="button" aria-pressed="true">상세보기</a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
+            <!-- pagenation 추가 - 2019-11-10 김영환 -->
             <nav aria-label="Page navigation" style="display: flex; justify-content: center; margin-top: 3rem;">
                 <ul class="pagination">
                     {% if contacts.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ contacts.previous_page_number }}" aria-label="Previous">
+                        <a class="page-link" href="?kind={{ kind }}&page={{ contacts.previous_page_number }}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
@@ -86,19 +86,21 @@
                     
                     {% for i in contacts.paginator.page_range %}
                     <li class="page-item {% if i == contacts.number %}active{% endif %}">
-                        <a class="page-link" href="?page={{i}}">{{ i }}</a>
+                        <a class="page-link" href="?kind={{ kind }}&page={{i}}">{{ i }}</a>
                     </li>
                     {% endfor %}
                     
                     {% if contacts.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ contacts.next_page_number }}" aria-label="Next">
+                        <a class="page-link" href="?kind={{ kind }}&page={{ contacts.next_page_number }}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
                     {% endif %}
                 </ul>
             </nav>
+            
+            <!-- 에러 핸들러 추가 - 2019-11-07 김영환 -->
             {% if error != "" %}
             <div class="alert alert-danger" role="alert" style="display: block;">
               {{ error }}
@@ -106,80 +108,134 @@
             {% endif %}
         </div>
     </div>
-    
+{% endblock %}    
 </section>
 
 <!-- 문의 모달 2019 10 27 남승철 추가-->
 
 <div class="modal" tabindex="-1" role="dialog" id="myModal">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-            <form method="POST" action ="{%url 'sendEmail'%}">
-                {%csrf_token%}
-                <div class="form-group">
-                  <label for="exampleInputEmail1">사용자 메일</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">내용</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "content"></textarea>
-                  </div>
-                </div>
-        
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">문의</button>
-                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                </div>
-            </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- 주문서 모달 2019 10 27 남승철 추가-->
-  <div class="modal" tabindex="-1" role="dialog" id="myModals">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+        <div class="modal-content">
             <div class="modal-header">
-                <form method="POST" action ="{%url 'order'%}">
+                <form method="POST" action="{%url 'sendEmail'%}">
                     {%csrf_token%}
                     <div class="form-group">
-                      <label for="exampleInputEmail1">주문 품목</label>
-                      <input type=""  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="품목명" name="subject">
+                        <label for="exampleInputEmail1">사용자 메일</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">E-mail</label>
-                      <input type="email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@example.com" name="email">
+                        <label for="exampleFormControlTextarea1">내용</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
+                    </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">문의</button>
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- 주문서 모달 2019 10 27 남승철 추가-->
+<div class="modal" tabindex="-1" role="dialog" id="myModals">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <form method="POST" action="{%url 'order'%}">
+                    {%csrf_token%}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">주문 품목</label>
+                        <input type="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="품목명" name="subject">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">PassWord</label>
-                      <input type="password"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="pw">
+                        <label for="exampleInputEmail1">E-mail</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@example.com" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">PassWord</label>
+                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pw">
                     </div>
                     <div class="form-group row">
-                        <label for="example-number-input" class="col-12 col-form-label" name = "count">수량</label>
+                        <label for="example-number-input" class="col-12 col-form-label" name="count">수량</label>
                         <div class="col-12">
-                          <input class="form-control" type="number" value="0" id="example-number-input" name = "count">
+                            <input class="form-control" type="number" value="0" id="example-number-input" name="count">
                         </div>
-                      </div>
+                    </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">요청사항</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "description" ></textarea>
-                      </div>
-                    
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                    </div>
+
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Q&A</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
-                    
-                    </div>
-                    <!-- Q&A 칸-->
-                
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">문의</button>
-                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                    </div>
-                </form>
-          </div>
+
+            </div>
+            <!-- Q&A 칸-->
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">문의</button>
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            </div>
+            </form>
         </div>
-      </div>
+    </div>
+</div>
+
+<button id="expand" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none">Extra large modal</button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="card">
+                <img src="#" class="card-img-top expand-img" alt="#">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    let expandImg = $(".expand-img");
+    let expand = $("#expand");
+    let timer;
+    
+    // 웹에서 마우스 클릭 이벤트 관리
+    $(".card-img-top").mousedown(function(e) { 
+        img = $(this).attr("src"); // 이미지 주소 받아오기
+        expandImg.attr("src", img);
+        timer = setTimeout(function () {
+            expand.click();
+        }, 1000);
+        if(e.which==3 || e.which==1){
+            timer();    
+        }
+        // alert(e.which); // 1:좌클릭, 2:휠클릭, 3:우클릭 
+    })
+    
+    $(".card-img-top").mouseup(function(e) { 
+        clearTimeout(timer);
+    })
+    
+    // 모바일에서 화면터치 이벤트 관리
+    $(".card-img-top").bind('touchstart', function(e) {
+        e.preventDefault();
+        img = $(this).attr("src"); // 이미지 주소 받아오기
+        expandImg.attr("src", img);
+        timer = setTimeout(function () {
+            expand.click();
+        }, 1000);
+    });
+    $(".card-img-top").bind('touchend', function(e) {
+        e.preventDefault();
+        clearTimeout(timer);
+    });
+</script>
+
 {% endblock %}

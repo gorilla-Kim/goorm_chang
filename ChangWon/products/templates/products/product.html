@@ -1,0 +1,32 @@
+<!-- 10/26 김영환 작성 -->
+{% extends 'products/index.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}Chang-Won{% endblock %}
+
+{% block product %}
+<div class="container">
+    <div class="card-columns row justify-content-md-center">
+        <!-- 상품 이미지 블록 -->
+        <div class="card col-sm-8">
+            <img src="{{ product.photo.url }}" class="card-img-top" alt="...">
+        </div>
+        <!-- 상품 설명 및 발주버튼 블록 -->
+        <div class="card col-sm-4">
+            <div class="card-body">
+                <h5 class="card-title">Card title that wraps to a new line</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+            <blockquote class="blockquote mb-0 card-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">
+                    <small class="text-muted">
+                        Someone famous in
+                        <cite title="Source Title">Source Title</cite>
+                    </small>
+                </footer>
+            </blockquote>
+        </div>
+    </div>
+    </div>
+{% endblock %}
