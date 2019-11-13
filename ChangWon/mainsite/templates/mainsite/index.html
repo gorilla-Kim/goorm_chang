@@ -6,7 +6,7 @@
 
 {% block contents %}
 <link href="{% static 'mainsite/css/creative.css' %}" rel="stylesheet"> 
-<!-- 색 수정을 위해 추가 -->
+<!-- 색 수정을 위해 추가 심세은 -->
 
 <!-- Masthead 1번페이지 내용 -->
 <header class="masthead">
@@ -16,7 +16,7 @@
                 <h1 class="text-uppercase text-white font-weight-bold"> OO 홈페이지에 오신 것을<br/> 환영합니다!</h1><!--홈페이지 메인 화면-->
                 <hr class="divider my-4">
             </div>
-            <div class="col-lg-8 align-self-baseline"><!--주요 거래처 디비에서 받아옴-->
+            <div class="col-lg-8 align-self-baseline"><!--주요 거래처 디비에서 받아오도록 구현 심세은-->
                 <div class="typing-box">
                     <div class="typing-txt">
                         <!-- 화면에 출력할 내용을 list안에 추가해주세요. - 김영환 -->
@@ -41,13 +41,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-justify">
-                <h2 class="text-center text-black mt-0">CEO 인사말</h2><!--인사말만 가운데 정렬-->
+                <h2 class="text-center text-black mt-0">CEO 인사말</h2><!--인사말만 가운데 정렬 필요-->
                 <hr class="divider light my-4">
                 <p class="text-black mb-4">
                 {% for i in about %}
                     {{ i }}
                 {% endfor %}
-                <!--인사말 내용 디비에서 받아옴--></p>
+                <!--인사말 내용 디비에서 받아옴 심세은--></p>
                 <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
             </div>
         </div>
@@ -64,6 +64,7 @@
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="mt-5">
                     <!-- <i class="fas fa-4x fa-gem text-primary mb-4"></i> -->
+                    <!-- 기계도 디비에서 받아오도록 작성 심세은 -->
                     <img src="{% static 'mainsite/img/m2.JPG' %}" alt="">
                     <h3 class="h4 mb-2">{{i}}</h3>
                     <p class="text-muted mb-0">{{i.tech_content}}</p>
@@ -75,7 +76,6 @@
 </section>
 
 <!-- Portfolio Section --> 
-<!-- 이미지 파일 디비에서 가져와야함 이미지 자동 사이즈 조절 때문에 두개 따로 했는데 디비에 어떻게 해야할지 몰라서 보류 -->
 <section id="portfolio">
     <div class="container-fluid p-0">
         <div class="row no-gutters">
@@ -165,7 +165,7 @@
 <!-- 필요없는 부분인거 같아서 삭제 -->
 
 <!-- Contact Section -->
-<!-- 이것도 디비에서 가져오도록 함 -->
+<!-- 이것도 디비에서 가져오도록 함 심세은 -->
 <section class="page-section" id="contact">
     <div class="container">
         <div class="row justify-content-center">

@@ -6,6 +6,8 @@ from .models import Contact
 from .models import Contact
 
 # Create your views here.
+
+#내용을 디비에서 받아오기 위해서 추가 심세은
 def main(request):
     try:
         client = Intro.objects.all()

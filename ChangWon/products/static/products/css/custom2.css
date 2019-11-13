@@ -1,0 +1,14 @@
+#custom-file{
+    width: 458px;
+    padding: 7.5px 15px;
+    justify-content: center;
+}
+
+#addfile{
+    margin-top: 20px;
+}
+
+.custom-file-label{
+    width: 487px; 
+    justify-content: center;
+}

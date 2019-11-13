@@ -10,13 +10,16 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+ /*색은 primary1~3 까지만 변경을 하면 전체 레이아웃의 색을 변경 가능--문정민*/
+ /*텍스트의 경우 .text-white 혹은 .text-black으로 설정 해두었기에 이것만 변경하면 됨 (html을 설정하면 됨)--문정민*/
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
   --red: #dc3545;
-  --orange: #f4623a;
+  --orange: #83afe9b7;
   --yellow: #ffc107;
   --green: #28a745;
   --teal: #20c997;
@@ -24,7 +27,9 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #f4623a;
+  --primary: rgb(163, 154, 150);
+  --primary2: #d3a8a0ab;
+  --primary3: #9c7972de;
   --secondary: #6c757d;
   --success: #28a745;
   --info: #17a2b8;
@@ -64,7 +69,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #8e97a1;
   text-align: left;
   background-color: #fff;
 }
@@ -158,14 +163,20 @@ sup {
   top: -.5em;
 }
 
+a11 {/*하단 이메일 링크 색상 */
+  color: var(--primary);
+  text-decoration: none;
+  background-color: transparent;
+}
+
 a {
-  color: #f4623a;
+  color: #fff;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #d6370c;
+  color: #fff;
   text-decoration: underline;
 }
 
@@ -483,9 +494,12 @@ mark,
   content: "\2014\00A0";
 }
 
+/* 이미지 위치 수정 김영환 */
 .img-fluid {
   max-width: 100%;
   height: auto;
+  /* margin-right:20%; */
+  /* margin-bottom:20%; */
 }
 
 .img-thumbnail {
@@ -2254,38 +2268,38 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
-.btn-primary {
+.btn-primary {/*버튼 부분 일반 색변경--문정민*/
   color: #fff;
-  background-color: #f4623a;
-  border-color: #f4623a;
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
-.btn-primary:hover {
+.btn-primary:hover {/*버튼 부분 마우스커서 올렸을 때 색변경--문정민*/
   color: #fff;
-  background-color: #f24516;
-  border-color: #ee3e0d;
+  background-color: var(--primary3);
+  border-color: var(--primary3);
 }
 
 .btn-primary:focus, .btn-primary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(246, 122, 88, 0.5);
+  box-shadow: 0 0 0 0.2rem #fff;
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
   color: #fff;
-  background-color: #f4623a;
-  border-color: #f4623a;
+  background-color: #fff;
+  border-color: #fff;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #ee3e0d;
-  border-color: #e23a0d;
+  background-color: #fff;
+  border-color: #fff;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(246, 122, 88, 0.5);
+  box-shadow: 0 0 0 0.2rem #fff;
 }
 
 .btn-secondary {
@@ -2324,36 +2338,36 @@ fieldset:disabled a.btn {
 
 .btn-success {
   color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: #83afe9b7;
+  border-color: #83afe9b7;
 }
 
 .btn-success:hover {
   color: #fff;
-  background-color: #218838;
-  border-color: #1e7e34;
+  background-color: #83afe9b7;
+  border-color: #83afe9b7;
 }
 
 .btn-success:focus, .btn-success.focus {
-  box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem #83afe9b7;
 }
 
 .btn-success.disabled, .btn-success:disabled {
   color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: #83afe9b7;
+  border-color: #83afe9b7;
 }
 
 .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active,
 .show > .btn-success.dropdown-toggle {
   color: #fff;
-  background-color: #1e7e34;
-  border-color: #1c7430;
+  background-color: #83afe9b7;
+  border-color: #83afe9b7;
 }
 
 .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus,
 .show > .btn-success.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem #83afe9b7;
 }
 
 .btn-info {
@@ -2415,8 +2429,8 @@ fieldset:disabled a.btn {
 .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active,
 .show > .btn-warning.dropdown-toggle {
   color: #212529;
-  background-color: #d39e00;
-  border-color: #c69500;
+  background-color: #83afe9b7;
+  border-color: #83afe9b7;
 }
 
 .btn-warning:not(:disabled):not(.disabled):active:focus, .btn-warning:not(:disabled):not(.disabled).active:focus,
@@ -2426,8 +2440,8 @@ fieldset:disabled a.btn {
 
 .btn-danger {
   color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
+  background-color: #83afe9b7;
+  border-color: #83afe9b7;
 }
 
 .btn-danger:hover {
@@ -2527,14 +2541,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary {
-  color: #f4623a;
-  border-color: #f4623a;
+  color: #83afe9b7;
+  border-color: #83afe9b7;
 }
 
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #f4623a;
-  border-color: #f4623a;
+  background-color: #fff;
+  border-color: #fff;
 }
 
 .btn-outline-primary:focus, .btn-outline-primary.focus {
@@ -2542,15 +2556,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-primary.disabled, .btn-outline-primary:disabled {
-  color: #f4623a;
+  color: #fff;
   background-color: transparent;
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
 .show > .btn-outline-primary.dropdown-toggle {
   color: #fff;
-  background-color: #f4623a;
-  border-color: #f4623a;
+  background-color: #fff;
+  border-color: #fff;
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
@@ -2784,7 +2798,7 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: #f4623a;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -3054,7 +3068,7 @@ input[type="button"].btn-block {
   bottom: auto;
 }
 
-.dropdown-divider {
+.dropdown-divider {/*중간에 틈 색깔 --문정민*/
   height: 0;
   margin: 0.5rem 0;
   overflow: hidden;
@@ -3083,7 +3097,7 @@ input[type="button"].btn-block {
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #f4623a;
+  background-color: #fff;
 }
 
 .dropdown-item.disabled, .dropdown-item:disabled {
@@ -3436,8 +3450,8 @@ input[type="button"].btn-block {
 
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
-  border-color: #f4623a;
-  background-color: #f4623a;
+  border-color: #fff;
+  background-color: #fff;
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {
@@ -3501,8 +3515,8 @@ input[type="button"].btn-block {
 }
 
 .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
-  border-color: #f4623a;
-  background-color: #f4623a;
+  border-color: #fff;
+  background-color: #fff;
 }
 
 .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
@@ -3727,7 +3741,7 @@ input[type="button"].btn-block {
   width: 1rem;
   height: 1rem;
   margin-top: -0.25rem;
-  background-color: #f4623a;
+  background-color: #fff;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3758,7 +3772,7 @@ input[type="button"].btn-block {
 .custom-range::-moz-range-thumb {
   width: 1rem;
   height: 1rem;
-  background-color: #f4623a;
+  background-color: #83afe9b7;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3792,7 +3806,7 @@ input[type="button"].btn-block {
   margin-top: 0;
   margin-right: 0.2rem;
   margin-left: 0.2rem;
-  background-color: #f4623a;
+  background-color: #83afe9b7;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3931,7 +3945,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #f4623a;
+  background-color: #83afe9b7;
 }
 
 .nav-fill .nav-item {
@@ -4596,7 +4610,7 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #f4623a;
+  color: var(--primary);
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
@@ -4629,8 +4643,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
-  background-color: #f4623a;
-  border-color: #f4623a;
+  background-color: #83afe9b7;
+  border-color: #83afe9b7;
 }
 
 .page-item.disabled .page-link {
@@ -4713,12 +4727,12 @@ a.badge:hover, a.badge:focus {
 
 .badge-primary {
   color: #fff;
-  background-color: #f4623a;
+  background-color: #83afe9b7;
 }
 
 a.badge-primary:hover, a.badge-primary:focus {
   color: #fff;
-  background-color: #ee3e0d;
+  background-color: #83afe9b7;
 }
 
 a.badge-primary:focus, a.badge-primary.focus {
@@ -5024,7 +5038,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   color: #fff;
   text-align: center;
   white-space: nowrap;
-  background-color: #f4623a;
+  background-color: #83afe9b7;
   transition: width 0.6s ease;
 }
 
@@ -5114,8 +5128,8 @@ a.badge-dark:focus, a.badge-dark.focus {
 .list-group-item.active {
   z-index: 2;
   color: #fff;
-  background-color: #f4623a;
-  border-color: #f4623a;
+  background-color: #83afe9b7;
+  border-color: #83afe9b7;
 }
 
 .list-group-horizontal {
@@ -6205,7 +6219,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #f4623a !important;
+  background-color: var(--primary) !important;/*CEO인사말 부분 박스 색 변경--문정민*/
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -6333,7 +6347,7 @@ button.bg-dark:focus {
 }
 
 .border-primary {
-  border-color: #f4623a !important;
+  border-color: #83afe9b7 !important;
 }
 
 .border-secondary {
@@ -9363,8 +9377,12 @@ button.bg-dark:focus {
   color: #fff !important;
 }
 
+.text-black {
+  color: rgb(15, 14, 14) !important;
+}
+
 .text-primary {
-  color: #f4623a !important;
+  color: #fff !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
@@ -9561,10 +9579,10 @@ html {
   color: rgba(255, 255, 255, 0.75);
 }
 
-hr.divider {
+hr.divider {/*중간틈 색깔--문정민*/
   max-width: 3.25rem;
   border-width: 0.2rem;
-  border-color: #f4623a;
+  border-color: var(--primary);
 }
 
 hr.light {
@@ -9601,19 +9619,19 @@ hr.light {
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
-  color: #6c757d;
+  color: var(--primary);
   font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   font-size: 0.9rem;
   padding: 0.75rem 0;
 }
 
-#mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {
-  color: #f4623a;
+#mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {/*이게 네브바 색인가?*/
+  color: var(--primary);
 }
 
-#mainNav .navbar-nav .nav-item .nav-link.active {
-  color: #f4623a !important;
+#mainNav .navbar-nav .nav-item .nav-link.active {/*이게 네브바에 폰트 색 변경--문정민*/
+  color: var(--primary) !important;
 }
 
 @media (min-width: 992px) {
@@ -9645,63 +9663,35 @@ hr.light {
     color: #212529;
   }
   #mainNav.navbar-scrolled .navbar-brand:hover {
-    color: #f4623a;
+    color: var(--primary);
   }
   #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link {
     color: #212529;
   }
-  #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover {
-    color: #f4623a;
+  #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover {/*네브바에 마우스 올렸을 때 색--문정민*/
+    color: var(--primary2);
   }
 }
 
 header.masthead {
-    /* margin-top: -5rem; */
-  /* padding-top: 4rem; */
-  /* padding-bottom: calc(10rem - 72px); */
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../img/bg-masthead.jpg");
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 72px);
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../img/a.jpg"); /*여기 매인 배경색 바꾸기*/
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-    overflow:hidden;
-    height: 100%;
-}
-/* 메인 케러셀 */
-.masthead .container {
-    max-width: 1920px;
-    margin: 0;
-    padding: 0;
-}
-.masthead .container #carouselExampleIndicators {
-    max-width: 100%;
-    height: 100%;
-    overflow: hidden;
 }
 
-.background-img {
-    margin: 0;
-    width:95rem;
-    height:auto;
-}
-
-/* end  */
 header.masthead h1 {
   font-size: 2.25rem;
 }
-/* test  */
-@media (max-width: 992px) {
-    .background-img {
-        margin-left:-100%;
-    }
-}
-/* end */
 
 @media (min-width: 992px) {
   header.masthead {
     height: 100vh;
     min-height: 40rem;
-    /* padding-top: 72px; */
+    padding-top: 72px;
     padding-bottom: 0;
   }
   header.masthead p {
@@ -9727,7 +9717,7 @@ header.masthead h1 {
   display: block;
 }
 
-#portfolio .container-fluid .portfolio-box .portfolio-box-caption {
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption { 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9739,7 +9729,7 @@ header.masthead h1 {
   text-align: center;
   opacity: 0;
   color: #fff;
-  background: rgba(244, 98, 58, 0.9);
+  background: #d3a8a0ab;/*사용기계 박스 색 바꾸기--문정민*/
   transition: opacity 0.25s ease;
   text-align: center;
 }
@@ -9757,4 +9747,10 @@ header.masthead h1 {
 
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {
   opacity: 1;
+  overflow: hidden;
+}
+/* 포트폴리오 부분 image size조절 - 김영환 */
+.show-box-tool {
+  height: 320px;
+  overflow: hidden;
 }

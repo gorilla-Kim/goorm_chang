@@ -6,7 +6,7 @@
 
 {% block contents %}
 
-<section class="page-section bg-primary" id="products">
+<section class="page-section bg-primary" id="products" style="padding-bottom: 0">
     <div class="wrapper">
         <!-- Sidebar -->
         <nav id="sidebar" class=" bg-secondary text-white">
@@ -63,11 +63,11 @@
                 <div class="card">
                     <img src="{{ product.photo.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
+                        <h5 class="card-title" id = "product_name">{{ product.name }}</h5>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">가격 : {{ product.price }}</small><br>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModals">주문</button> <!-- 남승철 수정 임시 문의 버튼-->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick = >주문</button> <!-- 남승철 수정 임시 문의 버튼-->
                         <a href="{% url 'product_view' product.id %}" class="btn btn-primary" role="button" aria-pressed="true">상세보기</a>
                     </div>
                 </div>
@@ -117,45 +117,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <form method="POST" action="{%url 'sendEmail'%}">
+                <form method="POST" enctype="multipart/form-data"  action="{%url 'order'%}">
                     {%csrf_token%}
                     <div class="form-group">
-                        <label for="exampleInputEmail1">사용자 메일</label>
+                        <label for="exampleInputEmail1">주문자 메일</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">내용</label>
+                        <label for="exampleFormControlTextarea1">주문 상세내용</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
-                    </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">문의</button>
-                <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- 주문서 모달 2019 10 27 남승철 추가-->
-<div class="modal" tabindex="-1" role="dialog" id="myModals">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <form method="POST" action="{%url 'order'%}">
-                    {%csrf_token%}
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">주문 품목</label>
-                        <input type="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="품목명" name="subject">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">E-mail</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@example.com" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">PassWord</label>
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pw">
                     </div>
                     <div class="form-group row">
                         <label for="example-number-input" class="col-12 col-form-label" name="count">수량</label>
@@ -163,27 +133,29 @@
                             <input class="form-control" type="number" value="0" id="example-number-input" name="count">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">요청사항</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                     <div class="form-group row">    
+                        <label for="example-number-input" class="col-12 col-form-label" id = "addfile">파일첨부</label>
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="customFile" name = "addfile">
+                          <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                    
+                     <div class="form-group">
+                       <label for="exampleFormControlTextarea1">Q&A</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Q&A</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">제출</button>
+                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     </div>
-
-            </div>
-            <!-- Q&A 칸-->
-
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">문의</button>
-                <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
-            </div>
             </form>
         </div>
     </div>
 </div>
+
+
 
 <button id="expand" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none">Extra large modal</button>
 
@@ -238,4 +210,15 @@
     });
 </script>
 
+    <!-- 기성품 주문 모달 처리 -->
+<script>
+    let product_name;
+    let modals;
+    function order{
+        product_name = document.getElementById('product_name');
+        modals = document.getElementById('myModal');
+        
+    }
+    
+</script>
 {% endblock %}

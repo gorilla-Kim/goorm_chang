@@ -49,46 +49,23 @@ def main(request):
     return render(request, 'products/index.html', context)
 
 
-# 2019-10-26 남승철 추가 
-# !문제! :  발신자 메일을 지정할 방법이 아직 없음;;;  찾아보는 중...
-
-def sendEmail(request):                     # 문의 사항 이메일 보내기 및 db에 등록
-    who = request.POST.get("email")         # 문의자 이름 or id
-    content = request.POST.get("content")   # 문의 내용
-    
-    # 메일 보내기
-    emailcontent = EmailMessage()                      # 이메일 객체 생성
-    emailcontent.subject = "문의사항"
-    emailcontent.body =  content                       # 내용
-    emailcontent.from_email = 'flash0211@naver.com'    # 발신지
-    emailcontent.to = ['flash0211@naver.com']          # 목적지
-    emailcontent.send() 
-
-    # 문의사항 db에 저장 - 2019-10.28 박은혜 추가
-    try :
-        Request(email = who, content = content).save()
-    except:
-        Request(email = None, content = None).save()
-
-    return redirect('main')
-
-
 def order(request):
     email = request.POST.get("email")
     subject = request.POST.get("subject")
     desc = request.POST.get("description")
     count = request.POST.get("count")
-
+    file = request.FILES["addfile"] # pdf 받아오기 2019 11.13 남승철 추가
     # 메일 보내기
     emailcontent = EmailMessage()                            # 이메일 객체 생성
     emailcontent.subject = subject
-    emailcontent.body =  count                           # 내용
+    emailcontent.body =  count 
+    emailcontent.attach("주문양식.pdf",file.read(),'application/pdf') # 파일첨부 2019 11.13 남승철 추가
     emailcontent.from_email = 'flash0211@naver.com'         # 발신지
     emailcontent.to = ['flash0211@naver.com']               # 목적지
     emailcontent.send() 
 
     # 주문 내용을 디비에 저장  - 2019-10.28 박은혜 추가, 2019-11-03 김영환 수정
-   
+    
     try:
         Order(
             email = email, 
