@@ -82,6 +82,7 @@ def product_view(request, pk):
     kinds = KindOfProduct.objects.all()
     context = {
         'product':product,
-        'kinds': kinds
+        'kinds': kinds,
+        "path": request.path,  # 현재 경로를 식별하기 위한 값 09.11.09 김영환
     }
     return render(request, 'products/product.html', context)
