@@ -1,4 +1,6 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 # Create your models here.
 
@@ -30,3 +32,33 @@ class Contact(models.Model):
     email =models.EmailField(max_length=254) #이메일
     def __str__(self):
         return self.office
+    
+# mainsite 포트폴리오 정보 
+class Portfolio(models.Model):
+    image = models.ImageField(upload_to="portfolio")
+    image_thumbnail = ImageSpecField(
+        source = 'image',            # 원본 ImageField 명
+        processors = [ResizeToFill(960, 720)], # 사이즈 조정
+        format = 'JPEG',           # 최종 저장 포맷
+        options = {'quality': 60}  # 저장 옵션
+    ) 
+    name = models.CharField(max_length=10)    # 상품이름
+    description = models.TextField()    # 상품정보
+    
+        # 삭제함수는 수정중에 있습니다 --> 오류 발견 10/26 김영환    
+    def delete(self, *args, **kargs): 
+        os.remove(os.path.join(settings.MEDIA_ROOT+"portfolio/", self.image.path))
+        super(Portfolio, self).delete(*args, **kargs) # 원래의 delete 함수를 실행
+        
+    # 업데이트시 이전사진 삭제 --> 잘 돌아감 10/26 김영환    
+    def save(self, *args, **kwargs):
+        # delete old file when replacing by updating the file
+        try:
+            this = Portfolio.objects.get(id=self.id)
+            if this.image != self.image:
+                this.image.delete(save=False)
+        except: pass # when new photo then we do nothing, normal case          
+        super(Portfolio, self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name

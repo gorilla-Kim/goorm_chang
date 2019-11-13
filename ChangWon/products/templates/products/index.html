@@ -35,12 +35,6 @@
                     <a class="kinds" href="/products?kind={{kind}}">{{ kind }}</a>
                 </li>
                 {% endfor %}
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
             </ul>
         </nav>
         <!--   content    -->
@@ -52,22 +46,23 @@
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-                    <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#myModal">제품 문의하기</button> <!-- 남승철 수정 임시 문의 버튼-->
+                    <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#myModal" onclick = "order_private()">제품 문의하기</button> <!-- 남승철 수정 임시 문의 버튼 2019.11.13 수정-->
                 </div>
             </nav>
             <!--  여기서부터 Product 리스트를 업로드 하시면 됩니다.  -->
 
 {% block product %}            
-            <div class="card-deck m-2 mt-4">
+            <div class="card-deck row m-2 mt-4">
                 {% for product in contacts %}
-                <div class="card">
-                    <img src="{{ product.photo.url }}" class="card-img-top" alt="...">
+                <div class="card col-4">
+                    <img src="{{ product.photo_thumbnail.url }}" class="card-img-top" alt="{{ product.photo.url }}">
                     <div class="card-body">
                         <h5 class="card-title" id = "product_name">{{ product.name }}</h5>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">가격 : {{ product.price }}</small><br>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick = >주문</button> <!-- 남승철 수정 임시 문의 버튼-->
+                        <!-- 남승철 수정 임시 문의 버튼-->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick = "order('{{product.name}}')" >주문</button> 
                         <a href="{% url 'product_view' product.id %}" class="btn btn-primary" role="button" aria-pressed="true">상세보기</a>
                     </div>
                 </div>
@@ -117,15 +112,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <form method="POST" enctype="multipart/form-data"  action="{%url 'order'%}">
+                <form method="POST" enctype="multipart/form-data" action="{%url 'order'%}">
                     {%csrf_token%}
                     <div class="form-group">
                         <label for="exampleInputEmail1">주문자 메일</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">주문 상세내용</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
+                        <label for="exampleFormControlTextarea1" id="product_kind">주문 상세내용</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1 " rows="3" name="content"></textarea>
                     </div>
                     <div class="form-group row">
                         <label for="example-number-input" class="col-12 col-form-label" name="count">수량</label>
@@ -133,16 +128,16 @@
                             <input class="form-control" type="number" value="0" id="example-number-input" name="count">
                         </div>
                     </div>
-                     <div class="form-group row">    
-                        <label for="example-number-input" class="col-12 col-form-label" id = "addfile">파일첨부</label>
+                    <div class="form-group row">
+                        <label for="example-number-input" class="col-12 col-form-label" id="addfile">파일첨부</label>
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="customFile" name = "addfile">
-                          <label class="custom-file-label" for="customFile">Choose file</label>
+                            <input type="file" class="custom-file-input" id="customFile" name="addfile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                     </div>
-                    
-                     <div class="form-group">
-                       <label for="exampleFormControlTextarea1">Q&A</label>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Q&A</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
                     </div>
 
@@ -150,13 +145,14 @@
                         <button type="submit" class="btn btn-primary">제출</button>
                         <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
-
-
+    
+<!-- 김영환 추가 -->
 <button id="expand" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none">Extra large modal</button>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -180,20 +176,17 @@
     
     // 웹에서 마우스 클릭 이벤트 관리
     $(".card-img-top").mousedown(function(e) { 
-        img = $(this).attr("src"); // 이미지 주소 받아오기
+        img = $(this).attr("alt"); // 이미지 주소 받아오기
         expandImg.attr("src", img);
         timer = setTimeout(function () {
             expand.click();
         }, 1000);
-        if(e.which==3 || e.which==1){
-            timer();    
-        }
         // alert(e.which); // 1:좌클릭, 2:휠클릭, 3:우클릭 
-    })
+    });
     
     $(".card-img-top").mouseup(function(e) { 
         clearTimeout(timer);
-    })
+    });
     
     // 모바일에서 화면터치 이벤트 관리
     $(".card-img-top").bind('touchstart', function(e) {
@@ -213,14 +206,18 @@
     <!-- 기성품 주문 모달 처리 -->
 <script>
     let product_name;
-    let modalabs;
+    let modals;
     let label;
-    function order{
-        product_name = document.getElementById('product_name');
-        modals = document.getElementById('myModal');
-        document.createElement('label');
+    function order(productName){
+        modals = document.getElementById('product_kind');
+        modals.innerHTML = productName;
     
     }
     
+    function order_private(){
+        modals = document.getElementById('product_kind');
+        modals.innerHTML = "주문 상세내용";
+    
+    }
 </script>
 {% endblock %}

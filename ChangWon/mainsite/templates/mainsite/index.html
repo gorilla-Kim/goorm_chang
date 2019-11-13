@@ -79,78 +79,21 @@
 <section id="portfolio">
     <div class="container-fluid p-0">
         <div class="row no-gutters">
+            {% for image in portfolio %}
             <div class="col-lg-4 col-sm-6">
                 <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/Bending.jpg' %}">
-                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/Bending.jpg' %}" alt="">
+                    <img class="img-fluid" src="{{ image.image_thumbnail.url }}" alt="">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
                         </div>
                         <div class="project-name">
-                            CNC 절곡기
+                            {{ image.name }}
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/deburring.jpg' %}">
-                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/deburring.jpg' %}" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                        </div>
-                        <div class="project-name">
-                            디버링기
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/foam.jpg' %}">
-                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/foam.jpg' %}" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                        </div>
-                        <div class="project-name">
-                            폼밍기
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/la.jpg' %}">
-                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/la.jpg' %}" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                        </div>
-                        <div class="project-name">
-                            CNC 레이저
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/tapping.jpg' %}">
-                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/tapping.jpg' %}" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                        </div>
-                        <div class="project-name">
-                            탭핑기
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a class="portfolio-box show-box-tool" href="{% static 'mainsite/img/portfolio/fullsize/punching.jpg' %}">
-                    <img class="img-fluid" src="{% static 'mainsite/img/portfolio/thumbnails/punching.jpg' %}" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                        </div>
-                        <div class="project-name">
-                            CNC 펀칭기
-                        </div>
-                    </div>
-                </a>
-            </div>
+            {% endfor %}
+            
         </div>
     </div>
 </section>

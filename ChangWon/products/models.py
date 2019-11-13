@@ -1,4 +1,6 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 import os
 # Create your models here.
 
@@ -16,6 +18,12 @@ class Product(models.Model):
     description = models.TextField()    # 상품정보
     price = models.IntegerField()    # 가격정보
     photo = models.ImageField(upload_to="products")    # 상품 사진이름
+    photo_thumbnail = ImageSpecField(
+        source = 'photo',            # 원본 ImageField 명
+        processors = [ResizeToFill(960, 720)], # 사이즈 조정
+        format = 'JPEG',           # 최종 저장 포맷
+        options = {'quality': 60}  # 저장 옵션
+    ) 
     
     created_at = models.DateTimeField(auto_now_add=True)    # 해당 레코드 생성시 현재 시간 자동저장
     updated_at = models.DateTimeField(auto_now=True)    # 해당 레코드 갱신시 현재 시간 자동저장

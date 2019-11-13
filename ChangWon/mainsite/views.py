@@ -3,7 +3,7 @@ from .models import About
 from .models import Intro
 from .models import Service
 from .models import Contact
-from .models import Contact
+from .models import Portfolio
 
 # Create your views here.
 
@@ -14,6 +14,7 @@ def main(request):
         about = About.objects.all()
         tech =  Service.objects.all()
         contact = Contact.objects.all()
+        portfolio = Portfolio.objects.all()
     except:
         print("="*10+" mainpage 관련 DB 오류 "+"="*10)
     context = { 
@@ -21,6 +22,7 @@ def main(request):
         "client":client,
         "about":about,"tech":tech, 
         "contact":contact, 
-        "path": request.path  # 현재 경로를 식별하기 위한 값 09.11.09 김영환
+        "path": request.path,  # 현재 경로를 식별하기 위한 값 09.11.09 김영환
+        "portfolio": portfolio
     }
     return render(request, 'mainsite/index.html', context)
