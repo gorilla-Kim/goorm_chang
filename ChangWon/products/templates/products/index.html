@@ -56,15 +56,22 @@
             <div class="card-deck row m-2 mt-4">
                 {% for product in contacts %}
                 <div class="card col-md-4">
-                    <img src="{{ product.photo_thumbnail.url }}" class="card-img-top" alt="{{ product.photo.url }}">
-                    <div class="card-body">
-                        <h5 class="card-title" id = "product_name">{{ product.name }}</h5>
-                    </div>
+                    <a href="{% url 'product_view' product.id %}">
+                        <img src="{{ product.photo_thumbnail.url }}" class="card-img-top product-img" alt="{{ product.photo.url }}">
+                        <div class="card-body">
+                            <h5 class="card-title" id = "product_name">{{ product.name }}</h5>
+                        </div>
+                    </a>
                     <div class="card-footer">
-                        <small class="text-muted">가격 : {{ product.price }}</small><br>
                         <!-- 남승철 수정 임시 문의 버튼-->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick = "order('{{product.name}}')" >주문</button> 
-                        <a href="{% url 'product_view' product.id %}" class="btn btn-primary" role="button" aria-pressed="true">상세보기</a>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <small class="text-muted">가격 : {{ product.price }}</small><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="btn btn-primary col" data-toggle="modal" data-target="#myModal" onclick = "order('{{product.name}}')" style="font-size:1.2rem;">주문</button>
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -173,34 +180,40 @@
 <script>
     let expandImg = $(".expand-img");
     let expand = $("#expand");
+    let index = false;
     let timer;
     
     // 웹에서 마우스 클릭 이벤트 관리
-    $(".card-img-top").mousedown(function(e) { 
+    $(".product-img").mousedown(function(e) { 
         img = $(this).attr("alt"); // 이미지 주소 받아오기
         expandImg.attr("src", img);
         timer = setTimeout(function () {
+            e.preventDefault();
             expand.click();
         }, 1000);
         // alert(e.which); // 1:좌클릭, 2:휠클릭, 3:우클릭 
     });
     
-    $(".card-img-top").mouseup(function(e) { 
+    $(".product-img").mouseup(function(e) { 
         clearTimeout(timer);
     });
     
     // 모바일에서 화면터치 이벤트 관리
-    $(".card-img-top").bind('touchstart', function(e) {
-        e.preventDefault();
+    $(".product-img").bind('touchstart', function(e) {
         img = $(this).attr("src"); // 이미지 주소 받아오기
         expandImg.attr("src", img);
         timer = setTimeout(function () {
+            index = true;
             expand.click();
-        }, 1000);
+        }, 700);
     });
-    $(".card-img-top").bind('touchend', function(e) {
-        e.preventDefault();
-        clearTimeout(timer);
+    $(".product-img").bind('touchend', function(e) {
+        if(index){
+            e.preventDefault();
+            index = !index;  
+        }else {
+            clearTimeout(timer); 
+        }
     });
 </script>
 
