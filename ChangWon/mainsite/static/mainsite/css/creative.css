@@ -2372,18 +2372,21 @@ fieldset:disabled a.btn {
 
 .btn-info {
   color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  /* 색 수정 심세은 */
+  background-color: #29272769;
+  border-color: #29272769;
 }
 
 .btn-info:hover {
   color: #fff;
-  background-color: #138496;
-  border-color: #117a8b;
+  /* toggle 마우스 올렸을 때 색상 변경 심세은 */
+  background-color: #242222d3;
+  border-color: #29272769;
 }
 
 .btn-info:focus, .btn-info.focus {
-  box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
+  /* toggle 박스 그림자 색상 변경 심세은 */
+  box-shadow: 0 0 0 0.2rem #423d3d5b;
 }
 
 .btn-info.disabled, .btn-info:disabled {
@@ -2395,13 +2398,15 @@ fieldset:disabled a.btn {
 .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active,
 .show > .btn-info.dropdown-toggle {
   color: #fff;
-  background-color: #117a8b;
-  border-color: #10707f;
+  /* 마우스 누르고 있을때 박스 색상 변경 심세은*/
+  background-color: #6b67675b;
+  border-color: #6b67675b;
 }
 
 .btn-info:not(:disabled):not(.disabled):active:focus, .btn-info:not(:disabled):not(.disabled).active:focus,
 .show > .btn-info.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
+  /* 마우스 누르고 있을때 박스 그림자 색상 변경 심세은*/
+  box-shadow: 0 0 0 0.2rem #6b67675b;
 }
 
 .btn-warning {
@@ -4643,8 +4648,9 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
-  background-color: #83afe9b7;
-  border-color: #83afe9b7;
+  /* 색수정 심세은 */
+  background-color:  #6b67675b;
+  border-color:  #6b67675b;
 }
 
 .page-item.disabled .page-link {
@@ -6229,7 +6235,8 @@ button.bg-primary:focus {
 }
 
 .bg-secondary {
-  background-color: #6c757d !important;
+  /* 사이드 배경 색 수정 심세은 */
+  background-color:#29272769 !important;
 }
 
 a.bg-secondary:hover, a.bg-secondary:focus,
@@ -9626,7 +9633,7 @@ hr.light {
   padding: 0.75rem 0;
 }
 
-#mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {/*이게 네브바 색인가?*/
+#mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {
   color: var(--primary);
 }
 
@@ -9676,7 +9683,7 @@ hr.light {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 72px);
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../img/a.jpg"); /*여기 매인 배경색 바꾸기*/
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../img/b.jpeg"); /*여기 매인 배경 사진 바꾸기 심세은*/
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
