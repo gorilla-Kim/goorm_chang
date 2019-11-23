@@ -57,7 +57,7 @@
                 {% for product in contacts %}
                 <div class="card col-md-4">
                     <a href="{% url 'product_view' product.id %}">
-                        <img src="{{ product.photo_thumbnail.url }}" class="card-img-top product-img" alt="{{ product.photo.url }}">
+                        <img src="{{ product.photo_thumbnail.url }}" class="card-img-top product-img mt-3" alt="{{ product.photo.url }}">
                         <div class="card-body">
                             <h5 class="card-title" id = "product_name">{{ product.name }}</h5>
                         </div>
