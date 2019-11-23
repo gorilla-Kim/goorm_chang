@@ -127,6 +127,10 @@
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email">
                     </div>
                     <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pwd">
+  </div>
+                    <div class="form-group">
                         <label for="exampleFormControlTextarea1" id="product_kind">주문 상세내용</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1 " rows="3" name="content"></textarea>
                     </div>
@@ -169,7 +173,7 @@
             <div class="card">
                 <img src="#" class="card-img-top expand-img" alt="#">
                 <div class="card-body">
-                    <p class="card-text">설명을 추가해주세요.</p>
+                    <p class="card-text">배경클릭 후 나가기</p>
                 </div>
             </div>
         </div>
@@ -222,9 +226,11 @@
     let product_name;
     let modals;
     let label;
+
     function order(productName){
         modals = document.getElementById('product_kind');
         modals.innerHTML = productName;
+       
     
     }
     

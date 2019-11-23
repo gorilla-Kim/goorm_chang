@@ -26,10 +26,12 @@ def error_handeler(request, active, msg):
 def main(request):
     kinds = KindOfProduct.objects.all()
     kind = request.GET.get('kind')
-    if kind==None: # 만약에 kind 데이터가 없다면...
-        kind = KindOfProduct.objects.first() # 제일 첫번째 kind 객체를 사용한다.
-        
-    products = Product.objects.filter(kindOf = kind)
+    if kind==None or kind=="all": # 만약에 kind 데이터가 없다면...
+        kind = "all" # 제일 첫번째 kind 객체를 사용한다.
+        products = Product.objects.all()
+    else:
+        products = Product.objects.filter(kindOf = kind)
+    
     
     # == 페이지네이션 관련 소스 시작 -김영환 ==
     paginator = Paginator(products, 3) # Show 3 contacts per page
@@ -50,32 +52,60 @@ def main(request):
 
 
 def order(request):
+    subject=""
+    pwd = request.POST.get("pwd")
     email = request.POST.get("email")
-    subject = request.POST.get("subject")
     desc = request.POST.get("description")
     count = request.POST.get("count")
     file = request.FILES["addfile"] # pdf 받아오기 2019 11.13 남승철 추가
-    # 메일 보내기
+    question = request.POST.get("content")
+    
+    if question == "":
+        subject = "Q&A"
+    else:
+        subject = "발주내역"
+    #메일 보내기
     emailcontent = EmailMessage()                            # 이메일 객체 생성
     emailcontent.subject = subject
-    emailcontent.body =  count 
+    emailcontent.body =  email + '\n' + question +'\n'+ count 
     emailcontent.attach("주문양식.pdf",file.read(),'application/pdf') # 파일첨부 2019 11.13 남승철 추가
-    emailcontent.from_email = 'flash0211@naver.com'         # 발신지
+    emailcontent.from_email = 'nexus2493@gmail.com'         # 발신지
     emailcontent.to = ['flash0211@naver.com']               # 목적지
     emailcontent.send() 
 
     # 주문 내용을 디비에 저장  - 2019-10.28 박은혜 추가, 2019-11-03 김영환 수정
     
     try:
-        Order(
-            email = email, 
-            subject = subject, 
-            order_count =int(count), 
-            description = desc ).save()
+        # Order(
+        #     email = email,
+        #     pwd = pwd,
+        #     subject = subject,
+        #     order_count =int(count), 
+        #     description = desc 
+        # ).save()
+        order = Order()
+        print("1")
+        order.email = email
+        print("1")
+        order.pwd = pwd
+        print("1")
+        order.subject = subject
+        print("1")
+        order.order_count = int(count)
+        print("1")
+        order.description = desc
+        print("1")
+        order.save()
+        print("1")
     except:
         error_handeler(request, True, "- DB 오류 -")
 
     return redirect('productsList')
+
+
+
+
+
 
 def product_view(request, pk):
     product = Product.objects.get(pk=pk)
