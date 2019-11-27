@@ -124,37 +124,34 @@
                     {%csrf_token%}
                     <div class="form-group">
                         <label for="exampleInputEmail1">주문자 메일</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email">
+                        <input type="email" class="form-control" placeholder="Email"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" name="email">
                     </div>
                     <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pwd">
-  </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1" id="product_kind">주문 상세내용</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1 " rows="3" name="content"></textarea>
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pwd">
+                    </div>
+                    <div class="form-group" id="orders">
+                        <label for="exampleFormControlTextarea1" id="product_kind"></label>
+                      
                     </div>
                     <div class="form-group row">
                         <label for="example-number-input" class="col-12 col-form-label" name="count">수량</label>
-                        <div class="col-12">
+                        <div class="col-12"> 
                             <input class="form-control" type="number" value="0" id="example-number-input" name="count">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="example-number-input" class="col-12 col-form-label" id="addfile">파일첨부</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" name="addfile">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        <div class="col-12 custom-file" >
+                            <input type="file" class="custom-file-input" id="customFile" name="addfile" >
+                            <label class="custom-file-label col-12" for="customFile">Choose file</label>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Q&A</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
-                    </div>
-
+                    <input type ="hidden" value = "" name="order_kind" id="hiddentag">
+                      <input type ="hidden" value = "" name="isFile" id="isFile">
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">제출</button>
+                        <button type="submit" class="btn btn-primary" onclick="chaeckFile()">제출</button>
                         <button type="submit" class="btn btn-secondary" data-dismiss="modal">취소</button>
                     </div>
                 </form>
@@ -221,23 +218,61 @@
     });
 </script>
 
-    <!-- 기성품 주문 모달 처리 -->
+<!-- 기성품, 주문제작  모달 처리  2019/11/24 최중 수정-->
 <script>
     let product_name;
     let modals;
-    let label;
-
+    let files;
+    // 기성품 주문 제작시 실행될 함수
     function order(productName){
+        //제품 이름이 표시됨
         modals = document.getElementById('product_kind');
-        modals.innerHTML = productName;
-       
-    
+        modals.innerHTML = productName; 
+        // jidden tag 에 기성품이름이 담겨 views.py 로 전송
+        document.getElementById("hiddentag").value = productName;
+        // textarea 삭제
+        document.getElementById("formexampleFormControlTextarea1control").remove(); 
+        
     }
     
     function order_private(){
+        //제품 이름 대신 "주문 상세내용" 이라는 문구 표시
         modals = document.getElementById('product_kind');
         modals.innerHTML = "주문 상세내용";
+         if(document.getElementById("formexampleFormControlTextarea1control"));
+         else{  
+            // textarea 박스 집어넣기
+            textarea = document.createElement("TEXTAREA");
+            document.getElementById("orders").appendChild(textarea);
+            textarea.setAttribute("class","form-control");
+            textarea.setAttribute("id","formexampleFormControlTextarea1control");
+            textarea.setAttribute("rows",3);
+            textarea.setAttribute("name","order_details");
+         }
+        // hiddentag에 1값을 주고 views.py에서 1일 경우 개인 주문제작으로 인식하게 함
+        document.getElementById("hiddentag").value = "1";
     
+    
+    }
+    
+    // 파일 유무 체크
+    function chaeckFile(){
+        // 모달 닫고 겨면 내용 초기화 되게 해주는 부분
+        $('.modal').on('hidden.bs.modal', function (e) {
+            console.log('modal close');
+          $(this).find('form')[0].reset()
+        });
+        // 파일을 가져와 확장자를 추출한다
+        document.getElementById("isFile").value = "1";
+        files = document.getElementById('customFile').value;
+        files = files.slice(files.indexOf(".") + 1).toLowerCase();
+        if(!files){
+            document.getElementById("isFile").value = "0";
+        }
+        else if(files != "pdf"){
+            alert(".pdf 확장자만 업로드 가능합니다");
+            event.preventDefault();
+        }
     }
 </script>
 {% endblock %}

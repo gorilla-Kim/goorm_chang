@@ -1,11 +1,18 @@
 <!-- 2019.11.20 김영환 수정  -->
 {% extends 'admin/base_site.html' %}
 {% load static %}
+{% block title %}관리자 사이트{%endblock %}
 
 {% block branding %}
-<!--경계선-->
+<div style="margin: 1rem 0 1rem 0;">
+    <span>
+        <a class="btn btn-btn-secondary mr-3" href="{% url 'main' %}">Home</a>    
+        <a class="btn btn-btn-secondary" href="{% url 'productsList' %}">Product</a>
+    </span>
+</div
     <a href="{% url 'admin:index' %}" class="django-admin-logo">
-        <!-- Django Administration -->
-        <img height="60" src="https://image.chosun.com/sitedata/image/201803/25/2018032501979_0.jpg" alt="{{ site_header|default:_('Django administration') }}">
+        <!-- Django Administration
+        <img height="60" src="https://image.chosun.com/sitedata/image/201803/25/2018032501979_0.jpg" alt="{{ site_header|default:_('Django administration') }}"> -->
+        <h2 style="color:white">Example Industry</h2>
     </a>
-{% endblock branding %}
+{% endblock %}

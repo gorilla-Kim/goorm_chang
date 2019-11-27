@@ -3,29 +3,15 @@
 {% load i18n static %}
 
 {% block branding %}
-        
-
-<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="{% url 'main' %}">Example 산업</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <!-- 메인 페이지 네브바 식별 09.11.09 김영환 -->
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{% url 'main' %}">Example-Main</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{% url 'productsList' %}">Product-Page</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div style="margin-bottom: 1rem;">
+    <span>
+        <a class="btn btn-btn-secondary mr-3" href="{% url 'main' %}">Home</a>    
+        <a class="btn btn-btn-secondary" href="{% url 'productsList' %}">Product</a>
+    </span>
+</div
     <a href="{% url 'admin:index' %}" class="django-admin-logo">
-        <!-- Django Administration -->
-        <img height="60" src="https://image.chosun.com/sitedata/image/201803/25/2018032501979_0.jpg" alt="{{ site_header|default:_('Django administration') }}">
+        <!-- Django Administration
+        <img height="60" src="https://image.chosun.com/sitedata/image/201803/25/2018032501979_0.jpg" alt="{{ site_header|default:_('Django administration') }}"> -->
+        <h2 style="color:white">Example Industry</h2>
     </a>
 {% endblock branding %}
