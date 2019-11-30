@@ -11,9 +11,10 @@
         <!-- Sidebar -->
         <nav id="sidebar" class=" bg-secondary text-white">
             <div class="sidebar-header">
+                {% block sidebar_title %}
                 <h3>상품 카테고리</h3>
+                {% endblock %}
             </div>
-
             <ul class="list-unstyled components">
                 <p>Dummy Heading</p>
                 <li class="active">
@@ -30,11 +31,14 @@
                         </li>
                     </ul>
                 </li>
+                
+                {% block sidebar_category %}
                 {% for kind in kinds %}
                 <li>
                     <a class="kinds" href="/products?kind={{kind}}">{{ kind }}</a>
                 </li>
                 {% endfor %}
+                {% endblock %}
             </ul>
         </nav>
         <!--   content    -->
@@ -47,9 +51,13 @@
                         <span>Toggle Sidebar</span>
                     </button>
                     <!-- 남승철 수정 임시 문의 버튼 2019.11.13 수정-->
-                    <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#myModal" onclick = "order_private()">제품 문의하기</button> 
+                    <button type="button" data-toggle="modal" class="btn btn-primary" data-target="#myModal" onclick = "order_private()">
+                        제품 문의하기
+                    </button> 
                 </div>
             </nav>
+{% block sidebar_custom_btn %}
+{% endblock %}
             
 <!--  여기서부터 Product 리스트를 업로드 하시면 됩니다.  -->
 {% block product %}            
@@ -76,6 +84,7 @@
                 </div>
                 {% endfor %}
             </div>
+{% endblock %}
             <!-- pagenation 추가 - 2019-11-10 김영환 -->
             <nav aria-label="Page navigation" style="display: flex; justify-content: center; margin-top: 3rem;">
                 <ul class="pagination">
@@ -110,8 +119,7 @@
             </div>
             {% endif %}
         </div>
-    </div>
-{% endblock %}    
+    </div>    
 </section>
 
 <!-- 문의 모달 2019 10 27 남승철 추가-->

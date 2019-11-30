@@ -59,13 +59,16 @@
                         <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                     </li>
                     <!-- products 페이지를 포함한 하위 페이지의 네브바 표시 09.11.09 김영환 -->
-                    {% elif "products" in path %} 
+                    {% else %} 
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{% url 'main' %}">Home</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="{% url 'productsList' %}">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{% url 'board_main' %}">Board</a>
                     </li>
                 </ul>
             </div>
@@ -78,7 +81,7 @@
     <!-- Footer 아래 메뉴바 -->
     <footer class="bg-light py-5">
         <div class="container">
-            <div class="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap</div>
+            <div class="small text-center text-muted">Copyright &copy; 2019 - ChangWon-Industry</div>
         </div>
     </footer>
     

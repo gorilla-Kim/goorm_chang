@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'imagekit',
     'mainsite',
     'products',
+    'board',
 ]
 
 MIDDLEWARE = [

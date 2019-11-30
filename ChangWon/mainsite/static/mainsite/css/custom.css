@@ -288,3 +288,7 @@ a.article:hover {
     background-color: #eb5656;
     border-color: #f5c6cb;
 }
+
+#new-write{
+    margin-bottom: 20px;
+}

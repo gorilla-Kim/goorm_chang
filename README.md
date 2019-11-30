@@ -1,7 +1,7 @@
 # ChangWon Project
 
 * PM 
-    * 김영환.
+    * 김영환
 
 * Front-End team
     * 심세은

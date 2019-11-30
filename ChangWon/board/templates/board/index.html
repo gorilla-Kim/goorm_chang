@@ -1,0 +1,55 @@
+<!-- 10/26 김영환 작성 -->
+{% extends 'products/index.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}Chang-Won{% endblock %}
+
+<!-- sidebar title 김영환 -->
+{% block sidebar_title %}<h3>게시판</h3>{{kind}}{% endblock %}
+
+
+<!-- sidebar_category 김영환 -->
+{% block sidebar_category %}
+    {% for i in category %}
+    <li>
+        <a class="kinds" href="/board?kind={{i}}">{{ i }}</a>
+    </li>
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar_custom_btn %}
+<div class="container">
+    <a class="btn btn-dark" id="new-write" href="{% url 'create_board' %}" >새 글쓰기</a>
+</div>
+{% endblock %}
+
+<!-- sidebar_content -->
+{% block product %}
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">작성자</th>
+                <th scope="col">제목</th>
+                <th scope="col">날짜</th>
+                <th scope="col">조회수</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for board in boards %}
+            <tr>
+                
+                <th scope="row">{{board.email}}</th>
+                <td>{{board.subject}}</td>
+                <td>{{board.created_at}}</td>
+                <td>{{board.hit}}</td>
+                <td>
+                    <a href="{% url 'read_board' board.id %}">확인하기</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

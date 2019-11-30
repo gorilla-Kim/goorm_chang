@@ -1,0 +1,60 @@
+<!-- 10/26 김영환 작성 -->
+{% extends 'products/index.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}Chang-Won{% endblock %}
+
+<!-- sidebar title 김영환 -->
+{% block sidebar_title %}게시판{% endblock %}
+
+
+<!-- sidebar_category 김영환 -->
+{% block sidebar_category %}
+    {% for i in category %}
+    <li>
+        <a class="kinds" href="/board?kind={{i}}">{{ i }}</a>
+    </li>
+    {% endfor %}
+{% endblock %}
+
+{% block product %}
+<div class="container">
+<form method="POST" action = "{% url 'create_board' %}" >
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="text-white" for="exampleFormControlInput1">이메일 주소 입력</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
+    </div>
+    <div class="form-group">
+        <label class="text-white" for="boardPwd">Password 입력</label>
+        <input type="password" class="form-control" id="boardPwd" name="pwd">
+    </div>
+    <div class="form-group">
+        <label class="text-white" for="boardSubject ">제목을 입력</label>
+        <input type="text" class="form-control" id="boardSubject" placeholder="제목을 입력하세요." name="subject">
+    </div>
+    <div class="form-group">
+        <label class="text-white" for="exampleFormControlSelect1">게시판 선택</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="board_category">
+            {% for i in category %}
+            <option>{{i.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="text-white" for="exampleFormControlTextarea1">내용입력</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="content"></textarea>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck" name="admin_option">
+            <label class="form-check-label text-white" for="gridCheck">
+                관리자만 보기
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">제출하기</button>
+</form>
+</div>
+
+{% endblock %}

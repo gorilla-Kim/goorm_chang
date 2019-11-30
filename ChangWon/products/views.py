@@ -123,6 +123,7 @@ def product_view(request, pk):
         'product':product,
         'kinds': kinds,
         # 현재 경로를 식별하기 위한 값 09.11.09 김영환
-        "path": request.path,  
+        'path': request.path,
+        'error': "",
     }
     return render(request, 'products/product.html', context)

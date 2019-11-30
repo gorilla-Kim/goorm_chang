@@ -1,0 +1,43 @@
+<!-- 10/26 김영환 작성 -->
+{% extends 'products/index.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% block title %}Chang-Won{% endblock %}
+
+<!-- sidebar title 김영환 -->
+{% block sidebar_title %}게시판{% endblock %}
+
+
+<!-- sidebar_category 김영환 -->
+{% block sidebar_category %}
+    {% for i in category %}
+    <li>
+        <a class="kinds" href="/board?kind={{i}}">{{ i }}</a>
+    </li>
+    {% endfor %}
+{% endblock %}
+
+{% block product %}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <p class="card-title">카테고리 : {{board.board_category}}</p>
+            <h2>제목 : {{board.subject}}</h2>
+            <hr>
+            <p class="card-text">{{board.content}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">사용자 : {{board.email}}</li>
+            <li class="list-group-item">생성일 : {{board.created_at}}</li>
+            {% if board.admin_option %}
+            <li class="list-group-item">옵션 : 관리자만 보기 활성화</li>
+            {% endif %}
+        </ul>
+        <div class="card-body">
+            <!--남승철 2019.11.30 a tag class를 bootstrap button 으로 바꾸어 줌-->
+            <a href="#"  class="btn btn-secondary">UPDATE</a>
+            <a href="#"  class="btn btn-secondary">DELETE</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
