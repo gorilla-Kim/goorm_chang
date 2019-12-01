@@ -35,9 +35,12 @@
         </ul>
         <div class="card-body">
             <!--남승철 2019.11.30 a tag class를 bootstrap button 으로 바꾸어 줌-->
-            <a href="#"  class="btn btn-secondary">UPDATE</a>
-            <a href="#"  class="btn btn-secondary">DELETE</a>
+            <a href="{%url 'updatepage' board.id%}"  class="btn btn-secondary">UPDATE</a>
+            <a href="{%url 'delete_board' board.id%}"  class="btn btn-secondary">DELETE</a>
         </div>
     </div>
 </div>
 {% endblock %}
+
+
+{% block custom_modal %}{% endblock %}

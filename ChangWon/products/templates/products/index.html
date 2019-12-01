@@ -56,11 +56,11 @@
                     </button> 
                 </div>
             </nav>
-{% block sidebar_custom_btn %}
-{% endblock %}
+            {% block sidebar_custom_btn %}
+            {% endblock %}
             
-<!--  여기서부터 Product 리스트를 업로드 하시면 됩니다.  -->
-{% block product %}            
+            <!--  여기서부터 Product 리스트를 업로드 하시면 됩니다.  -->
+            {% block product %}            
             <div class="card-deck row m-2 mt-4">
                 {% for product in contacts %}
                 <div class="card col-md-4">
@@ -84,7 +84,7 @@
                 </div>
                 {% endfor %}
             </div>
-{% endblock %}
+            {% endblock %}
             <!-- pagenation 추가 - 2019-11-10 김영환 -->
             <nav aria-label="Page navigation" style="display: flex; justify-content: center; margin-top: 3rem;">
                 <ul class="pagination">
@@ -121,9 +121,10 @@
         </div>
     </div>    
 </section>
+{% endblock %}
 
 <!-- 문의 모달 2019 10 27 남승철 추가-->
-
+{% block custom_modal %}
 <div class="modal" tabindex="-1" role="dialog" id="myModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -167,8 +168,8 @@
         </div>
     </div>
 </div>
+   
 
-    
 <!-- 김영환 추가 -->
 <button id="expand" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" style="display: none">Extra large modal</button>
 

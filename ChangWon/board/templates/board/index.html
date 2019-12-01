@@ -19,37 +19,38 @@
 
 {% block sidebar_custom_btn %}
 <div class="container">
-    <a class="btn btn-dark" id="new-write" href="{% url 'create_board' %}" >새 글쓰기</a>
+    <a class="btn btn-dark" href="{% url 'create_board' %}" style="margin-bottom: 8px;" >새 글쓰기</a>
 </div>
 {% endblock %}
 
 <!-- sidebar_content -->
 {% block product %}
 <div class="container">
-    <table class="table">
+    <table class="table table-striped" style="text-align:center;">
         <thead class="thead-dark">
-            <tr>
-                <th scope="col">작성자</th>
-                <th scope="col">제목</th>
-                <th scope="col">날짜</th>
-                <th scope="col">조회수</th>
-                <th scope="col"></th>
+            <tr class="custom-col">
+                <th scope="col" class=""style="width: 20%;">작성자</th>
+                <th scope="col" class="" style="width: 50%;">제목</th>
+                <th scope="col" class="custom-col-remove" style="width: 25%;">날짜</th>
+                <th scope="col" class="custom-col-remove" style="width: 30%;">조회수</th>
             </tr>
         </thead>
         <tbody>
-            {% for board in boards %}
-            <tr>
+            {% for board in contacts %}
+            <tr onclick="location.href='{% url 'read_board' board.id %}'" class="custom-col">
                 
-                <th scope="row">{{board.email}}</th>
-                <td>{{board.subject}}</td>
-                <td>{{board.created_at}}</td>
-                <td>{{board.hit}}</td>
-                <td>
-                    <a href="{% url 'read_board' board.id %}">확인하기</a>
-                </td>
+                <th scope="row" class="">{{board.getNickName}}</th>
+                <td style="overflow:hidden">{{board.getSubject}}</td>
+                {%if board.ifmodify == 'n'%}
+                    <td class="custom-col-remove">{{board.getYMD}}</td>
+                {%else%}
+                    <td class="custom-col">{{board.updated_at}}</td>
+                {%endif%}
+                <td class="custom-col-remove">{{board.hit}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
 {% endblock %}
+{% block custom_modal %}{% endblock %}

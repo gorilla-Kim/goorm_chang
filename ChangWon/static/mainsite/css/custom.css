@@ -255,6 +255,9 @@ a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
+    .custom-col {
+        display:none;
+    }
 }
 /* 포트폴리오 부분 image size조절 */
 .typing-box {

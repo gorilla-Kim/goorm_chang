@@ -19,7 +19,7 @@
 
 {% block product %}
 <div class="container">
-<form method="POST" action = "{% url 'create_board' %}" >
+<form method="POST" action = "{% url 'update_board' board.id %}" >
     {% csrf_token %}
     <div class="form-group">
         <label class="text-white" for="exampleFormControlInput1">이메일 주소 입력</label>
@@ -53,7 +53,8 @@
             </label>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">제출하기</button>
+    
+    <button type="submit" class="btn btn-dark">제출하기</button>
 </form>
 </div>
 

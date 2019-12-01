@@ -12,4 +12,16 @@
     width: 487px; 
     justify-content: center;
 }
+@media (max-width: 768px) {
+    .custom-col-remove {
+        display:none;
+    }
+    .custom-col{
+        min-width: 300px;
+        font-size : 0.8rem;
+    }
+}
+
+.table td, .table th {
+    min-width: 100px;
 }
