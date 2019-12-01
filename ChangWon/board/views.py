@@ -75,12 +75,16 @@ def main(request):
 def create_board(request):
     context = {}
     if request.method == 'POST':
-        board_category = request.POST.get("board_category")
+        board_category = Board_Category.objects.get(name=request.POST.get("board_category"))
         subject = request.POST.get("subject")
         email = request.POST.get("email")
         pwd = request.POST.get("pwd")
         content = request.POST.get("content")
-        admin_option = True if request.POST.get("admin_option")=="on" else False
+        admin_option = None
+        if(board_category.admin_option):
+            admin_option = True
+        else:
+            admin_option = True if request.POST.get("admin_option")=="on" else False
         
         board = Board( 
             board_category = Board_Category.objects.get(name=board_category),
@@ -159,9 +163,10 @@ def read_board(request, pk):
     }
     try:
         board = Board.objects.get(id = pk)
+        path = "/board/?kind="+str(board.board_category)
         if(board.admin_option):
             error_handeler(request, True, "관리자만 확인 가능합니다.")
-            return redirect("board_main")
+            return redirect(path)
         else:
             board.hit += 1
             board.save()

@@ -44,7 +44,7 @@
                 {%if board.ifmodify == 'n'%}
                     <td class="custom-col-remove">{{board.getYMD}}</td>
                 {%else%}
-                    <td class="custom-col">{{board.updated_at}}</td>
+                    <td class="custom-col">{{board.getUpdateYMD}}</td>
                 {%endif%}
                 <td class="custom-col-remove">{{board.hit}}</td>
             </tr>

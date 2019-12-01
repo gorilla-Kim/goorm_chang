@@ -36,6 +36,10 @@ class Board(models.Model):
         time = self.created_at.strftime('%Y-%m-%d')
         return time
     
+    def getUpdateYMD(self):
+        time = self.updated_at.strftime('%Y-%m-%d')
+        return time
+    
     def getSubject(self):
         sub = self.subject
         if(len(self.subject)>17):
