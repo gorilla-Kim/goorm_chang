@@ -284,8 +284,8 @@ a.article:hover {
 }
 /* 경고창 -김영환 */
 .alert-danger {
-    color: #721c24;
-    background-color: #eb5656;
+    color: black;
+    background-color: #f8d7da;
     border-color: #f5c6cb;
 }
 
