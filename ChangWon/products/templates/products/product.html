@@ -8,24 +8,34 @@
 <div class="container">
     <div class="card-columns row justify-content-md-center">
         <!-- 상품 이미지 블록 -->
-        <div class="card col-sm-8">
-            <img src="{{ product.photo.url }}" class="card-img-top product-img" alt="{{ product.photo.url }}">
+        <div class="card col-sm-8" style ="display:flex; align-items: center; justify-content: center;">
+            <img src="{{ product.photo.url }}" class="card-img-top product-img" alt="{{ product.photo.url }}" >
         </div>
         <!-- 상품 설명 및 발주버튼 블록 -->
+        <!-- 상세부분 수정 심세은  -->
         <div class="card col-sm-4">
             <div class="card-body">
-                <h5 class="card-title">Card title that wraps to a new line</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <h5 class="card-title">제품 명: {{product.name}}</h5>
+                <hr>
             </div>
-            <blockquote class="blockquote mb-0 card-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">
-                    <small class="text-muted">
-                        Someone famous in
-                        <cite title="Source Title">Source Title</cite>
-                    </small>
-                </footer>
-            </blockquote>
+            <p class ="card-body" style="padding-top: 0px">
+                제품 설명:
+            </p>
+            <div class="card-body" style="padding-top: 0px">
+                <p class="card-text"> {{product.description|linebreaks}}</p>
+                <hr>
+            </div>
+            
+            <div class="card-body">
+                <p class="card-text">제품 가격: {{product.price}}</p>
+                <hr>
+            </div>
+            
+            <div align="right">
+                <button type = "button" class ="btn btn-primary" > 
+                    문의
+                </button> 
+            </div>
         </div>
     </div>
     </div>

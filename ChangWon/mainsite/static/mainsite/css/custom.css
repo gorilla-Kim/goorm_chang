@@ -126,7 +126,6 @@ span {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul li a {
@@ -288,4 +287,3 @@ a.article:hover {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
-

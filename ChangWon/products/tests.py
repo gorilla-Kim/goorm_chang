@@ -1,29 +1,59 @@
-from django.test import TestCase, Client
+from django.test import TestCase
+from django.db import models
+from . models import KindOfProduct, Product, Order
+
 
 # Create your tests here.
-from django.core.mail import EmailMessage # 메일 객체 생성시 필요함 - 2019-10-26 남승철 추가 
-
-class CustomTests(TestCase):
-    def order():
-        check = False
-          
-        try:
-            emailcontent = EmailMessage()                           # 이메일 객체 생성
-            emailcontent.subject = subject
-            emailcontent.body =  count                              # 내용
-            emailcontent.from_email = 'flash0211@naver.com'         # 발신지
-            emailcontent.to = ['flash0211@naver.com']               # 목적지
-            emailcontent.send()
-            check = True
-        except:
-            check = False
-        self.assertTrue(check)
+class test_Product(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super(test_Product, cls).setUpClass()
         
-class post(TestCase):
+        kindofproduct = KindOfProduct(
+            name = "kind"
+        )
+        kindofproduct.save()
+        
+        product = Product(
+            kindOf = KindOfProduct.objects.get(name = 'kind'),
+            name = "1",
+            description = "1",
+            price = 1,
+            photo = "C:/Users/13053/OneDrive/바탕 화면/주석 2019-12-02 193930.jpg",
+        )
+        product.save()
+        
+        order = Order(
+            email = "1@naver.com",
+            pwd = "1",
+            subject = "1",
+            order_count = 1,
+            description = "1"
+        )
+        order.save()
     
-    c = Client()
-    response = c.get('/products/order')
-    print(response.status_code)
-    response = c.post('/products/order', {'email': 'nexus2493@gmail.com', 'subject': '제목', 'order_count': 1, 'description': "sdfdf"})
-    print(response.status_code)
-    
+class Board_Category_ModelTestCase(test_Product):
+    def test_Category(self):
+        print('Product App test')
+        kindofproduct = KindOfProduct.objects.get(name = 'kind')
+        product = Product.objects.get(name = '1')
+        order = Order.objects.get(email = '1@naver.com')
+        
+        self.assertEqual(kindofproduct.name, 'kind')
+        
+        self.assertEqual(str(product.kindOf), 'kind')
+        self.assertEqual(product.name, '1')
+        self.assertEqual(product.description, '1')
+        self.assertEqual(product.price, 1)
+        self.assertEqual(product.photo, "C:/Users/13053/OneDrive/바탕 화면/주석 2019-12-02 193930.jpg",)
+        
+        self.assertEqual(order.email, '1@naver.com')
+        self.assertEqual(order.pwd, '1')
+        self.assertEqual(order.subject, '1')
+        self.assertEqual(order.order_count, 1)
+        self.assertEqual(order.description, '1')
+        print('Product App test success')
+        
+        
+        
+      

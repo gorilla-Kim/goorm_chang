@@ -9,7 +9,7 @@
 <section class="page-section bg-primary" id="products" style="padding-bottom: 0">
     <div class="wrapper">
         <!-- Sidebar -->
-        <nav id="sidebar" class=" bg-secondary text-white">
+        <nav id="sidebar" class="bg-dark text-white">
             <div class="sidebar-header">
                 {% block sidebar_title %}
                 <h3>상품 카테고리</h3>
@@ -46,7 +46,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <button type="button" id="sidebarCollapse" class=" btn btn-dark">
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
@@ -61,7 +61,7 @@
             
             <!--  여기서부터 Product 리스트를 업로드 하시면 됩니다.  -->
             {% block product %}            
-            <div class="card-deck row m-2 mt-4">
+            <div class="card-deck m-2 mt-4">
                 {% for product in contacts %}
                 <div class="card col-md-4">
                     <a href="{% url 'product_view' product.id %}">
@@ -98,7 +98,7 @@
                     
                     {% for i in contacts.paginator.page_range %}
                     <li class="page-item {% if i == contacts.number %}active{% endif %}">
-                        <a class="page-link" href="?kind={{ kind }}&page={{i}}">{{ i }}</a>
+                        <a class="page-link bg-dark" href="?kind={{ kind }}&page={{i}}">{{ i }}</a>
                     </li>
                     {% endfor %}
                     

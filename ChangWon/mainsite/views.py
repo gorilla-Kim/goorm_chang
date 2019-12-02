@@ -5,6 +5,8 @@ from .models import Service
 from .models import Contact
 from .models import Portfolio
 
+
+
 # Create your views here.
 
 #내용을 디비에서 받아오기 위해서 추가 심세은
@@ -26,3 +28,4 @@ def main(request):
         "portfolio": portfolio
     }
     return render(request, 'mainsite/index.html', context)
+

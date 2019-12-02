@@ -12,7 +12,7 @@
 {% block sidebar_category %}
     {% for i in category %}
     <li>
-        <a class="kinds" href="/board?kind={{i}}">{{ i }}</a>
+        <a class="kinds" href="/board?kind={{i.name}}">{{ i }}</a>
     </li>
     {% endfor %}
 {% endblock %}

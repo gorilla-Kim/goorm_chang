@@ -29,7 +29,7 @@ def main(request):
     context ={}
     board_category = None;
     boards = None;
-    
+    contacts=""
     # category 가져오기
     kind = request.GET.get('kind')
     try:
@@ -51,7 +51,6 @@ def main(request):
         page = request.GET.get('page')
         contacts = paginator.get_page(page)
         # == 페이지 네이션 관련 소스 끝 ==
-        
         print("="*10+"메인페이지 접속"+"="*10)
     except:
         print("="*10+" mainpage 관련 DB 오류 "+"="*10)
