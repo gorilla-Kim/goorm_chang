@@ -29,7 +29,7 @@ def main(request):
     context ={}
     board_category = None;
     boards = None;
-    contacts=""
+    contacts = ""
     # category 가져오기
     kind = request.GET.get('kind')
     try:
@@ -53,7 +53,7 @@ def main(request):
         # == 페이지 네이션 관련 소스 끝 ==
         print("="*10+"메인페이지 접속"+"="*10)
     except:
-        print("="*10+" mainpage 관련 DB 오류 "+"="*10)
+        print("="*10+" mainpage2 관련 DB 오류 "+"="*10)
     
     
     context = {
@@ -110,6 +110,32 @@ def create_board(request):
         print("test")
         return render(request, 'board/board.html', context)
 
+# 게시판 상세보기
+def read_board(request, pk):
+    context = {
+            # 에러를 제거하기 위한 사용 김영환
+            "error":error_handeler(request, False, ""), 
+            "title":"Chang-Won", 
+            # category 모두 가져오기
+            "category": Board_Category.objects.all(),
+            # 현재 경로를 식별하기 위한 값 09.11.09 김영환
+            "path": request.path, 
+    }
+    try:
+        board = Board.objects.get(id = pk)
+        path = "/board/?kind="+str(board.board_category)
+        if(board.admin_option):
+            error_handeler(request, True, "관리자만 확인 가능합니다.")
+            return redirect(path)
+        else:
+            board.hit += 1
+            board.save()
+    except:
+        error_handeler(request, True, "board DB 관련 오류!")
+        return redirect("board_main")
+    context["board"] = board
+    return render(request, 'board/boardView.html', context)
+
 # 수정
 def update_board(request,pk):
     context = {}
@@ -143,37 +169,11 @@ def update_board(request,pk):
             "path": request.path,  
         }
     return redirect('board_main')
-
 # 삭제
 def delete_board(request,pk):
     board = Board.objects.get(id=pk)
     board.delete()
     return redirect('board_main')
-
-def read_board(request, pk):
-    context = {
-            # 에러를 제거하기 위한 사용 김영환
-            "error":error_handeler(request, False, ""), 
-            "title":"Chang-Won", 
-            # category 모두 가져오기
-            "category": Board_Category.objects.all(),
-            # 현재 경로를 식별하기 위한 값 09.11.09 김영환
-            "path": request.path, 
-    }
-    try:
-        board = Board.objects.get(id = pk)
-        path = "/board/?kind="+str(board.board_category)
-        if(board.admin_option):
-            error_handeler(request, True, "관리자만 확인 가능합니다.")
-            return redirect(path)
-        else:
-            board.hit += 1
-            board.save()
-    except:
-        error_handeler(request, True, "board DB 관련 오류!")
-        return redirect("board_main")
-    context["board"] = board
-    return render(request, 'board/boardView.html', context)
 
 # 업데이트 페이지 
 def updatepage(request,pk):

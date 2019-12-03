@@ -88,7 +88,7 @@ def order(request):
     # 메일 보내기
     # 이메일 객체 생성
     emailcontent = EmailMessage()                           
-    emailcontent.body =  email + '\n' + "제품: " + desc +'\n'+ count
+    emailcontent.body =  email + '\n' + "제품: " +  desc + '\n' +  "수량: " +  count
     emailcontent.subject = "주문요청" 
     # 파일첨부 기능 pdf 만 됨. 2019 11.13 남승철 추가
     if isFile == "1":

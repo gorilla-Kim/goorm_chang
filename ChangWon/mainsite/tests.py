@@ -61,7 +61,7 @@ class Board_Category_ModelTestCase(test_Mainsite):
         self.assertEqual(portfolio.name, 'imgname')
         self.assertEqual(portfolio.description,'imgdes')
         self.assertEqual(portfolio.image,"C:/Users/13053/OneDrive/바탕 화면/주석 2019-12-02 193930.jpg")
-        print('Product App test success')
+        print('Mainsite App test success')
         
 
 
